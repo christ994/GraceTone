@@ -1,0 +1,11 @@
+{
+  "name": "gracetone-website",
+  "version": "1.0.0",
+  "description": "GraceTone Jazz Music Production - Official Website",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
