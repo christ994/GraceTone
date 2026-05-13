@@ -441,9 +441,12 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:
 
 <!-- NAV -->
 <nav id="navbar">
-  <a class="nav-logo" href="#" onclick="navigate('home');return false">
-    <strong>GraceTone <span style="color:var(--white)">JMP</span></strong>
-    <span>Jazz Music Production</span>
+  <a class="nav-logo" href="#" onclick="navigate('home');return false" style="display:flex;align-items:center;gap:.8rem;text-decoration:none">
+    <img src="/images/logo.jpeg" alt="GraceTone Logo" style="width:42px;height:42px;border-radius:50%;object-fit:cover;border:1px solid rgba(201,168,76,.4)"/>
+    <div>
+      <strong style="font-family:'Bebas Neue',sans-serif;font-size:1.55rem;letter-spacing:.12em;color:var(--gold)">GraceTone <span style="color:var(--white)">JMP</span></strong>
+      <span style="display:block;font-size:.52rem;letter-spacing:.35em;text-transform:uppercase;color:var(--cream2);margin-top:-2px">Jazz Music Production</span>
+    </div>
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#" onclick="navigate('home');return false" data-page="home">Accueil</a></li>
@@ -503,21 +506,45 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:
       <div class="ring"></div><div class="ring"></div><div class="ring"></div>
     </div>
     <div class="vinyl-spin"></div>
-    <div class="home-hero-content">
-      <div class="home-eyebrow">Tchad · Jazz Afro-Sahélien · Label Évangélique</div>
+
+    <!-- LOGO FLOTTANT CENTRE -->
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;pointer-events:none;animation:logoFloat 4s ease-in-out infinite">
+      <img src="/images/logo.jpeg" alt="GraceTone JMP Logo" style="width:140px;height:140px;border-radius:50%;object-fit:cover;border:2px solid rgba(201,168,76,.35);box-shadow:0 0 60px rgba(201,168,76,.15);opacity:.18"/>
+    </div>
+
+    <!-- MAQUETTES SLIDER droite vers gauche -->
+    <div style="position:absolute;bottom:0;left:0;right:0;height:220px;overflow:hidden;pointer-events:none;-webkit-mask-image:linear-gradient(to right,transparent,black 10%,black 90%,transparent);mask-image:linear-gradient(to right,transparent,black 10%,black 90%,transparent)">
+      <div style="display:flex;gap:2rem;width:max-content;animation:maquetteScroll 20s linear infinite;align-items:flex-end;padding:0 2rem 0 2rem">
+        <img src="/images/maquette1.jpeg" alt="Maquette" style="height:190px;width:auto;object-fit:cover;border:1px solid rgba(201,168,76,.25);border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.7);animation:imgFloat 5s ease-in-out infinite"/>
+        <img src="/images/maquette2.jpeg" alt="Maquette" style="height:170px;width:auto;object-fit:cover;border:1px solid rgba(201,168,76,.25);border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.7);animation:imgFloat 5s ease-in-out 1.5s infinite"/>
+        <img src="/images/maquette3.jpeg" alt="Maquette" style="height:185px;width:auto;object-fit:cover;border:1px solid rgba(201,168,76,.25);border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.7);animation:imgFloat 5s ease-in-out 3s infinite"/>
+        <img src="/images/maquette1.jpeg" alt="Maquette" style="height:190px;width:auto;object-fit:cover;border:1px solid rgba(201,168,76,.25);border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.7);animation:imgFloat 5s ease-in-out .8s infinite"/>
+        <img src="/images/maquette2.jpeg" alt="Maquette" style="height:170px;width:auto;object-fit:cover;border:1px solid rgba(201,168,76,.25);border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.7);animation:imgFloat 5s ease-in-out 2.2s infinite"/>
+        <img src="/images/maquette3.jpeg" alt="Maquette" style="height:185px;width:auto;object-fit:cover;border:1px solid rgba(201,168,76,.25);border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.7);animation:imgFloat 5s ease-in-out 4s infinite"/>
+      </div>
+    </div>
+
+    <div class="home-hero-content" style="position:relative;z-index:3">
+      <div class="home-eyebrow">Tchad · Jazz Afro-Sahélien · Label Évangélique · Est. 2015</div>
       <h1 class="home-title">GRACE<span class="g">TONE</span></h1>
       <p class="home-sub">Jazz Music Production — L'âme du Sahel en musique</p>
       <p class="home-tagline">Produire · Former · Distribuer · Rayonner</p>
       <div class="home-btns">
         <button class="btn-gold" onclick="navigate('about')">Découvrir le label</button>
         <button class="btn-outline" onclick="navigate('events')">Voir les événements</button>
+        <a href="/projet_gracetone.pdf" download style="display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--gold);padding:.85rem 2.6rem;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;border:1px solid rgba(201,168,76,.5);transition:background .25s,color .25s;font-family:'DM Sans',sans-serif">📄 Télécharger le projet</a>
       </div>
     </div>
-    <div class="home-scroll">
+    <div class="home-scroll" style="z-index:3">
       <span>Découvrir</span>
       <div class="scroll-line"></div>
     </div>
   </section>
+  <style>
+  @keyframes maquetteScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @keyframes imgFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  @keyframes logoFloat{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-53%) scale(1.05)}}
+  </style>
 
   <div class="marquee-bar">
     <div class="marquee-inner">
@@ -612,9 +639,9 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:
         </div>
         <div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div>
         <div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles Jazz</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div>
-        <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:info@gracetone.com">info@gracetone.com</a></li><li><a href="#">N'Djamena, Tchad</a></li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:Pafchristian@gmail.com">Pafchristian@gmail.com</a></li><li><a href="#">N'Djamena, Tchad</a></li></ul></div>
       </div>
-      <div class="footer-bottom"><span>© 2025 GraceTone JMP. Tous droits réservés.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div>
+      <div class="footer-bottom"><span>© 2026 GraceTone JMP. Tous droits réservés.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div>
     </div>
   </footer>
 </div><!-- /page-home -->
@@ -633,12 +660,18 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:
     <div class="about-intro">
       <div class="about-body">
         <div class="about-quote reveal">"La musique est notre ministère,<br>le jazz est notre langage."</div>
-        <p class="reveal"><strong>GraceTone Jazz Music Production (JMP)</strong> est un label de musique indépendant spécialisé dans le jazz, basé au <strong>Tchad</strong>. À caractère évangélique, nous visons à devenir une <strong>référence mondiale dans le jazz afro-sahélien</strong>.</p>
+        <p class="reveal">Le terme <strong>Jazz Musique Production</strong> est apparu le <strong>5 octobre 2015</strong>, suite d'une observation sur la musique tchadienne — constatant un manque de moyens et de sponsoring dans le domaine de la musique classique au Tchad. GraceTone JMP est avant tout un <strong>label discographique à caractère évangélique (Gospel)</strong> qui a pour objet social la fabrication, l'édition, la production et la commercialisation d'œuvres musicales.</p>
         <p class="reveal">Notre mission est de <strong>structurer la filière musicale locale</strong> en produisant, formant et distribuant des artistes, grâce à des infrastructures de pointe, des partenariats stratégiques internationaux et une vision résolument tournée vers <strong>l'export global</strong>.</p>
         <p class="reveal">GraceTone JMP n'est pas simplement un label — c'est un <strong>écosystème complet</strong> : studio semi-pro de qualité internationale, académie de formation, réseau de distribution mondial et plateforme événementielle pour le jazz africain.</p>
         <p class="reveal">Né dans le Sahel tchadien, notre son puise dans les rythmes ancestraux de la région pour les fusionner avec les harmonies du jazz international. Un genre qui appartient à l'Afrique et qui s'exporte dans le monde entier — porteur d'un <strong>message de foi et de grâce</strong>.</p>
       </div>
       <div class="about-side reveal">
+        <div style="margin-bottom:1.5rem;position:relative;overflow:hidden;border:1px solid rgba(201,168,76,.15)">
+          <img src="/images/maquette2.jpeg" alt="Siège GraceTone JMP" style="width:100%;height:200px;object-fit:cover;display:block;opacity:.85"/>
+          <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,var(--dark2),transparent);padding:1rem">
+            <span style="font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold)">Siège social · N'Djamena, Tchad</span>
+          </div>
+        </div>
         <div class="about-card">
           <span class="section-label" style="display:block;text-align:center;margin-bottom:1.5rem">GraceTone JMP en chiffres</span>
           <div class="about-stat-grid">
@@ -672,9 +705,9 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:
         <div class="footer-brand"><span class="footer-brand-name">GraceTone JMP</span><span class="footer-brand-sub">Jazz Music Production</span><p>Label de production musicale indépendant dédié au jazz afro-sahélien. Basé à N'Djamena, Tchad.</p></div>
         <div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div>
         <div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles Jazz</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div>
-        <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:info@gracetone.com">info@gracetone.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:Pafchristian@gmail.com">Pafchristian@gmail.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div>
       </div>
-      <div class="footer-bottom"><span>© 2025 GraceTone JMP. Tous droits réservés.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div>
+      <div class="footer-bottom"><span>© 2026 GraceTone JMP. Tous droits réservés.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div>
     </div>
   </footer>
 </div><!-- /about -->
@@ -687,7 +720,14 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:
       <span class="section-label reveal">Ce que nous offrons</span>
       <h1 class="section-title reveal">Nos <span class="it">Services</span></h1>
       <div class="divider reveal"></div>
-      <div class="services-intro reveal"><p>GraceTone JMP propose un écosystème complet de services musicaux — du studio à la scène internationale, en passant par la formation et la distribution mondiale.</p></div>
+      <div class="services-intro reveal">
+        <p>GraceTone JMP propose un écosystème complet de services musicaux — du studio à la scène internationale, en passant par la formation et la distribution mondiale.</p>
+        <p style="margin-top:1rem;color:var(--muted);font-size:.85rem;line-height:1.8">Label <strong style="color:var(--gold-p)">major et indépendant</strong> — il peut signer des contrats de partenariat avec d'autres labels nationaux et internationaux, organiser des festivals jazz gospel, et ne dépend pas des majors de l'industrie du disque tant sur le plan artistique que financier.</p>
+        <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap">
+          <a href="/projet_gracetone.pdf" download style="display:inline-flex;align-items:center;gap:.6rem;border:1px solid rgba(201,168,76,.4);color:var(--gold);padding:.7rem 1.6rem;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;transition:background .25s;font-family:'DM Sans',sans-serif">📄 Télécharger le projet complet</a>
+          <a href="mailto:Pafchristian@gmail.com" style="display:inline-flex;align-items:center;gap:.6rem;border:1px solid rgba(201,168,76,.2);color:var(--muted);padding:.7rem 1.6rem;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;transition:color .25s;font-family:'DM Sans',sans-serif">✉ Pafchristian@gmail.com</a>
+        </div>
+      </div>
     </div>
   </div>
   <div class="container" style="padding-bottom:6rem">
@@ -720,7 +760,14 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:
       </div>
     </div>
   </div>
-  <footer><div class="container"><div class="footer-grid"><div class="footer-brand"><span class="footer-brand-name">GraceTone JMP</span><span class="footer-brand-sub">Jazz Music Production</span><p>Label de production musicale indépendant. N'Djamena, Tchad.</p></div><div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div><div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:info@gracetone.com">info@gracetone.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div></div><div class="footer-bottom"><span>© 2025 GraceTone JMP.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div></div></footer>
+  <footer><div class="container"><div class="footer-grid"><div class="footer-brand"><span class="footer-brand-name">GraceTone JMP</span><span class="footer-brand-sub">Jazz Music Production</span><p>Label de production musicale indépendant. N'Djamena, Tchad.</p></div><div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div><div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:Pafchristian@gmail.com">Pafchristian@gmail.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 GraceTone JMP.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div></div></footer>
+
+      <div style="text-align:center;margin-top:3rem" class="reveal">
+        <a href="/projet_gracetone.pdf" download style="display:inline-flex;align-items:center;gap:.8rem;background:var(--gold);color:var(--black);padding:1rem 2.8rem;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;font-family:'DM Sans',sans-serif;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))">
+          📄 Télécharger le projet complet
+        </a>
+      </div>
+  </div>
 </div><!-- /services -->
 
 <!-- ░░░ PAGE ARTISTS ░░░ -->
@@ -796,7 +843,7 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:
       <button class="btn-gold" onclick="navigate('contact')">Soumettre votre candidature</button>
     </div>
   </div>
-  <footer><div class="container"><div class="footer-grid"><div class="footer-brand"><span class="footer-brand-name">GraceTone JMP</span><span class="footer-brand-sub">Jazz Music Production</span><p>Label de production musicale indépendant. N'Djamena, Tchad.</p></div><div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div><div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:info@gracetone.com">info@gracetone.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div></div><div class="footer-bottom"><span>© 2025 GraceTone JMP.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div></div></footer>
+  <footer><div class="container"><div class="footer-grid"><div class="footer-brand"><span class="footer-brand-name">GraceTone JMP</span><span class="footer-brand-sub">Jazz Music Production</span><p>Label de production musicale indépendant. N'Djamena, Tchad.</p></div><div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div><div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:Pafchristian@gmail.com">Pafchristian@gmail.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 GraceTone JMP.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div></div></footer>
 </div><!-- /artists -->
 
 <!-- ░░░ PAGE ARTICLES ░░░ -->
@@ -826,22 +873,22 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:
           <div class="af-cat">À la une · Jazz Afro-Sahélien</div>
           <h2 class="af-title">Le jazz afro-sahélien : naissance d'un genre mondial depuis le Tchad</h2>
           <p class="af-excerpt">Comment des musiciens tchadiens fusionnent les rythmes ancestraux du Sahel avec les harmonies bebop pour créer un son nouveau qui conquiert les scènes mondiales. GraceTone JMP au cœur de cette révolution sonore qui redessine la carte du jazz africain.</p>
-          <div class="af-meta"><span>Mai 2025</span><span>·</span><span>8 min de lecture</span></div>
+          <div class="af-meta"><span>Mai 2026</span><span>·</span><span>8 min de lecture</span></div>
         </div>
       </div>
       <div class="articles-side">
-        <div class="article-sm reveal"><div class="article-sm-cat">Foi & Musique</div><div class="article-sm-title">Jazz et Évangile : quand la musique devient un ministère</div><div class="article-sm-meta">Avr. 2025 · 7 min</div></div>
-        <div class="article-sm reveal"><div class="article-sm-cat">Histoire · Jazz Africain</div><div class="article-sm-title">L'héritage du jazz africain : de Fela Kuti à aujourd'hui</div><div class="article-sm-meta">Mar. 2025 · 6 min</div></div>
-        <div class="article-sm reveal"><div class="article-sm-cat">Industrie · Distribution</div><div class="article-sm-title">Streaming en Afrique centrale : stratégie 2025</div><div class="article-sm-meta">Fév. 2025 · 5 min</div></div>
+        <div class="article-sm reveal"><div class="article-sm-cat">Foi & Musique</div><div class="article-sm-title">Jazz et Évangile : quand la musique devient un ministère</div><div class="article-sm-meta">Avr. 2026 · 7 min</div></div>
+        <div class="article-sm reveal"><div class="article-sm-cat">Histoire · Jazz Africain</div><div class="article-sm-title">L'héritage du jazz africain : de Fela Kuti à aujourd'hui</div><div class="article-sm-meta">Mar. 2026 · 6 min</div></div>
+        <div class="article-sm reveal"><div class="article-sm-cat">Industrie · Distribution</div><div class="article-sm-title">Streaming en Afrique centrale : stratégie 2026</div><div class="article-sm-meta">Fév. 2026 · 5 min</div></div>
       </div>
     </div>
     <div class="articles-row" style="margin-top:1.5px">
-      <div class="article-sm reveal" style="background:var(--dark2);border:1px solid rgba(201,168,76,.08);padding:1.8rem"><div class="article-sm-cat">Studio · Technique</div><div class="article-sm-title">Produire au Tchad : défis et opportunités pour un label international</div><div class="article-sm-meta" style="margin-top:.8rem">Jan. 2025 · 5 min</div></div>
+      <div class="article-sm reveal" style="background:var(--dark2);border:1px solid rgba(201,168,76,.08);padding:1.8rem"><div class="article-sm-cat">Studio · Technique</div><div class="article-sm-title">Produire au Tchad : défis et opportunités pour un label international</div><div class="article-sm-meta" style="margin-top:.8rem">Jan. 2026 · 5 min</div></div>
       <div class="article-sm reveal" style="background:var(--dark2);border:1px solid rgba(201,168,76,.08);padding:1.8rem"><div class="article-sm-cat">Improvisation · Technique</div><div class="article-sm-title">5 techniques d'improvisation jazz afro-sahélien à maîtriser</div><div class="article-sm-meta" style="margin-top:.8rem">Déc. 2024 · 6 min</div></div>
       <div class="article-sm reveal" style="background:var(--dark2);border:1px solid rgba(201,168,76,.08);padding:1.8rem"><div class="article-sm-cat">Interview · Artiste</div><div class="article-sm-title">Rencontre avec les premiers artistes signés chez GraceTone JMP</div><div class="article-sm-meta" style="margin-top:.8rem">Nov. 2024 · 10 min</div></div>
     </div>
   </div>
-  <footer><div class="container"><div class="footer-grid"><div class="footer-brand"><span class="footer-brand-name">GraceTone JMP</span><span class="footer-brand-sub">Jazz Music Production</span><p>Label de production musicale indépendant. N'Djamena, Tchad.</p></div><div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div><div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:info@gracetone.com">info@gracetone.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div></div><div class="footer-bottom"><span>© 2025 GraceTone JMP.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div></div></footer>
+  <footer><div class="container"><div class="footer-grid"><div class="footer-brand"><span class="footer-brand-name">GraceTone JMP</span><span class="footer-brand-sub">Jazz Music Production</span><p>Label de production musicale indépendant. N'Djamena, Tchad.</p></div><div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div><div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:Pafchristian@gmail.com">Pafchristian@gmail.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 GraceTone JMP.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div></div></footer>
 </div><!-- /articles -->
 
 <!-- ░░░ PAGE MAGAZINE ░░░ -->
@@ -864,17 +911,17 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:
           <circle cx="250" cy="250" r="60" fill="rgba(201,168,76,0.04)"/>
           <text x="250" y="275" text-anchor="middle" font-family="Bebas Neue, serif" font-size="90" fill="rgba(201,168,76,0.18)">♪</text>
           <text x="250" y="440" text-anchor="middle" font-family="Bebas Neue, serif" font-size="28" fill="rgba(201,168,76,0.45)" letter-spacing="8">GRACETONE JMP</text>
-          <text x="250" y="80" text-anchor="middle" font-family="Bebas Neue, serif" font-size="16" fill="rgba(201,168,76,0.35)" letter-spacing="6">VOL. 4 · PRINTEMPS 2025</text>
+          <text x="250" y="80" text-anchor="middle" font-family="Bebas Neue, serif" font-size="16" fill="rgba(201,168,76,0.35)" letter-spacing="6">VOL. 4 · PRINTEMPS 2026</text>
         </svg>
         <div class="mag-cover-badge">Nouveau</div>
       </div>
       <div class="reveal">
         <span class="mag-feat-label">Dernier numéro</span>
         <div class="mag-feat-title">L'Âme du Jazz Africain</div>
-        <div class="mag-feat-sub">Volume 4 — Printemps 2025</div>
+        <div class="mag-feat-sub">Volume 4 — Printemps 2026</div>
         <p class="mag-feat-desc">Dans ce quatrième numéro, GraceTone Magazine explore la renaissance du jazz africain contemporain, ses racines sahéliennes et sa projection mondiale. Interviews exclusives, analyses musicales, reportages de festivals et dossier spécial sur la production musicale en Afrique centrale.</p>
         <div class="mag-feat-meta">
-          <div class="mag-feat-meta-item"><span>Numéro</span><strong>Vol. 4 — 2025</strong></div>
+          <div class="mag-feat-meta-item"><span>Numéro</span><strong>Vol. 4 — 2026</strong></div>
           <div class="mag-feat-meta-item"><span>Pages</span><strong>120 pages</strong></div>
           <div class="mag-feat-meta-item"><span>Format</span><strong>PDF & Print</strong></div>
         </div>
@@ -909,13 +956,13 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:
           <div class="mag-info"><div class="mag-issue">Volume 1 — Été 2024</div><div class="mag-title">Naissance d'un Label</div><div class="mag-date">Juin 2024 · 88 pages</div></div>
         </div>
         <div class="mag-card reveal" style="border-style:dashed;border-color:rgba(201,168,76,.15);display:flex;align-items:center;justify-content:center;min-height:320px">
-          <div style="text-align:center;padding:2rem"><div style="font-size:2.5rem;opacity:.2;margin-bottom:1rem">📖</div><div class="mag-title">Vol. 5 — Été 2025</div><div class="mag-date" style="margin-top:.3rem">À paraître · Juin 2025</div></div>
+          <div style="text-align:center;padding:2rem"><div style="font-size:2.5rem;opacity:.2;margin-bottom:1rem">📖</div><div class="mag-title">Vol. 5 — Été 2026</div><div class="mag-date" style="margin-top:.3rem">À paraître · Juin 2026</div></div>
         </div>
       </div>
     </div>
     <div style="padding-bottom:6rem"></div>
   </div>
-  <footer><div class="container"><div class="footer-grid"><div class="footer-brand"><span class="footer-brand-name">GraceTone JMP</span><span class="footer-brand-sub">Jazz Music Production</span><p>Label de production musicale indépendant. N'Djamena, Tchad.</p></div><div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div><div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:info@gracetone.com">info@gracetone.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div></div><div class="footer-bottom"><span>© 2025 GraceTone JMP.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div></div></footer>
+  <footer><div class="container"><div class="footer-grid"><div class="footer-brand"><span class="footer-brand-name">GraceTone JMP</span><span class="footer-brand-sub">Jazz Music Production</span><p>Label de production musicale indépendant. N'Djamena, Tchad.</p></div><div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div><div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:Pafchristian@gmail.com">Pafchristian@gmail.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 GraceTone JMP.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div></div></footer>
 </div><!-- /magazine -->
 
 <!-- ░░░ PAGE EVENTS ░░░ -->
@@ -937,19 +984,19 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:
       <button class="events-tab">Galas</button>
     </div>
     <div class="events-list">
-      <div class="event-row reveal"><div class="event-date"><span class="event-day">21</span><span class="event-month">Juin 2025</span></div><div><div class="event-title">GraceTone Jazz Night — Édition Pilote</div><div class="event-loc">🌍 Palais de la Musique, <span>N'Djamena, Tchad</span></div></div><span class="event-genre-tag">Jazz · Showcase</span><button class="event-btn">Réserver</button></div>
-      <div class="event-row reveal"><div class="event-date"><span class="event-day">08</span><span class="event-month">Juil. 2025</span></div><div><div class="event-title">Festival Afro Jazz de Dakar</div><div class="event-loc">🌍 Grand Théâtre National, <span>Dakar, Sénégal</span></div></div><span class="event-genre-tag">Afro Jazz</span><button class="event-btn">Réserver</button></div>
-      <div class="event-row reveal"><div class="event-date"><span class="event-day">15</span><span class="event-month">Août 2025</span></div><div><div class="event-title">Masterclass Jazz — GraceTone Academy</div><div class="event-loc">🎓 Studio GraceTone JMP, <span>N'Djamena, Tchad</span></div></div><span class="event-genre-tag">Formation</span><button class="event-btn">S'inscrire</button></div>
-      <div class="event-row reveal"><div class="event-date"><span class="event-day">02</span><span class="event-month">Sep. 2025</span></div><div><div class="event-title">Jazz à Abidjan — Showcase GraceTone</div><div class="event-loc">🌍 Institut Français, <span>Abidjan, Côte d'Ivoire</span></div></div><span class="event-genre-tag">Jazz · Showcase</span><button class="event-btn">Réserver</button></div>
-      <div class="event-row reveal"><div class="event-date"><span class="event-day">18</span><span class="event-month">Oct. 2025</span></div><div><div class="event-title">GraceTone Label Night — Paris</div><div class="event-loc">🌍 New Morning, <span>Paris, France</span></div></div><span class="event-genre-tag">Jazz · International</span><button class="event-btn">Réserver</button></div>
-      <div class="event-row reveal"><div class="event-date"><span class="event-day">30</span><span class="event-month">Nov. 2025</span></div><div><div class="event-title">Soirée de Gala GraceTone JMP 2025</div><div class="event-loc">🌍 Hôtel Hilton, <span>N'Djamena, Tchad</span></div></div><span class="event-genre-tag">Gala · Jazz</span><button class="event-btn">Réserver</button></div>
+      <div class="event-row reveal"><div class="event-date"><span class="event-day">21</span><span class="event-month">Juin 2026</span></div><div><div class="event-title">GraceTone Jazz Night — Édition Pilote</div><div class="event-loc">🌍 Palais de la Musique, <span>N'Djamena, Tchad</span></div></div><span class="event-genre-tag">Jazz · Showcase</span><button class="event-btn">Réserver</button></div>
+      <div class="event-row reveal"><div class="event-date"><span class="event-day">08</span><span class="event-month">Juil. 2026</span></div><div><div class="event-title">Festival Afro Jazz de Dakar</div><div class="event-loc">🌍 Grand Théâtre National, <span>Dakar, Sénégal</span></div></div><span class="event-genre-tag">Afro Jazz</span><button class="event-btn">Réserver</button></div>
+      <div class="event-row reveal"><div class="event-date"><span class="event-day">15</span><span class="event-month">Août 2026</span></div><div><div class="event-title">Masterclass Jazz — GraceTone Academy</div><div class="event-loc">🎓 Studio GraceTone JMP, <span>N'Djamena, Tchad</span></div></div><span class="event-genre-tag">Formation</span><button class="event-btn">S'inscrire</button></div>
+      <div class="event-row reveal"><div class="event-date"><span class="event-day">02</span><span class="event-month">Sep. 2026</span></div><div><div class="event-title">Jazz à Abidjan — Showcase GraceTone</div><div class="event-loc">🌍 Institut Français, <span>Abidjan, Côte d'Ivoire</span></div></div><span class="event-genre-tag">Jazz · Showcase</span><button class="event-btn">Réserver</button></div>
+      <div class="event-row reveal"><div class="event-date"><span class="event-day">18</span><span class="event-month">Oct. 2026</span></div><div><div class="event-title">GraceTone Label Night — Paris</div><div class="event-loc">🌍 New Morning, <span>Paris, France</span></div></div><span class="event-genre-tag">Jazz · International</span><button class="event-btn">Réserver</button></div>
+      <div class="event-row reveal"><div class="event-date"><span class="event-day">30</span><span class="event-month">Nov. 2026</span></div><div><div class="event-title">Soirée de Gala GraceTone JMP 2026</div><div class="event-loc">🌍 Hôtel Hilton, <span>N'Djamena, Tchad</span></div></div><span class="event-genre-tag">Gala · Jazz</span><button class="event-btn">Réserver</button></div>
     </div>
     <div class="events-cta-band reveal">
       <div><h3>Organisez un événement avec GraceTone JMP</h3><p>Partenariat, co-organisation, booking d'artistes — contactez notre équipe événementielle.</p></div>
       <button class="btn-gold" onclick="navigate('contact')">Nous contacter</button>
     </div>
   </div>
-  <footer><div class="container"><div class="footer-grid"><div class="footer-brand"><span class="footer-brand-name">GraceTone JMP</span><span class="footer-brand-sub">Jazz Music Production</span><p>Label de production musicale indépendant. N'Djamena, Tchad.</p></div><div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div><div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:info@gracetone.com">info@gracetone.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div></div><div class="footer-bottom"><span>© 2025 GraceTone JMP.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div></div></footer>
+  <footer><div class="container"><div class="footer-grid"><div class="footer-brand"><span class="footer-brand-name">GraceTone JMP</span><span class="footer-brand-sub">Jazz Music Production</span><p>Label de production musicale indépendant. N'Djamena, Tchad.</p></div><div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div><div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:Pafchristian@gmail.com">Pafchristian@gmail.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 GraceTone JMP.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div></div></footer>
 </div><!-- /events -->
 
 <!-- ░░░ PAGE CONTACT ░░░ -->
@@ -967,9 +1014,9 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:
       <div class="reveal">
         <h3 class="contact-info" style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:var(--cream2);margin-bottom:2rem;line-height:1.6">Que vous soyez artiste, partenaire ou passionné de jazz — GraceTone JMP vous écoute.</h3>
         <div class="contact-item"><span class="contact-icon">📍</span><div><div class="contact-label">Adresse</div><div class="contact-value">N'Djamena, Tchad<br>Afrique Centrale</div></div></div>
-        <div class="contact-item"><span class="contact-icon">📧</span><div><div class="contact-label">Email</div><div class="contact-value">info@gracetone.com<br>booking@gracetone.com</div></div></div>
-        <div class="contact-item"><span class="contact-icon">🎷</span><div><div class="contact-label">Pour les artistes</div><div class="contact-value">artists@gracetone.com<br>Candidatures roster pilote</div></div></div>
-        <div class="contact-item"><span class="contact-icon">🎪</span><div><div class="contact-label">Événementiel</div><div class="contact-value">events@gracetone.com<br>Partenariats & co-organisation</div></div></div>
+        <div class="contact-item"><span class="contact-icon">📧</span><div><div class="contact-label">Email</div><div class="contact-value">Pafchristian@gmail.com</div></div></div>
+        <div class="contact-item"><span class="contact-icon">🎷</span><div><div class="contact-label">Pour les artistes</div><div class="contact-value">Pafchristian@gmail.com<br>Candidatures roster pilote</div></div></div>
+        <div class="contact-item"><span class="contact-icon">🎪</span><div><div class="contact-label">Événementiel</div><div class="contact-value">Pafchristian@gmail.com<br>Partenariats & co-organisation</div></div></div>
         <div class="contact-socials">
           <div class="contact-socials-title">Suivez-nous</div>
           <div class="social-row">
@@ -978,6 +1025,7 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:
             <a href="#" class="social-btn">YouTube</a>
             <a href="#" class="social-btn">Spotify</a>
             <a href="#" class="social-btn">Boomplay</a>
+            <a href="https://t.me/JAZZMUSICPRO" target="_blank" class="social-btn">Telegram</a>
           </div>
         </div>
       </div>
@@ -1030,9 +1078,9 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:
         <div class="footer-brand"><span class="footer-brand-name">GraceTone JMP</span><span class="footer-brand-sub">Jazz Music Production</span><p>Label de production musicale indépendant dédié au jazz afro-sahélien. Basé à N'Djamena, Tchad.</p></div>
         <div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div>
         <div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div>
-        <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:info@gracetone.com">info@gracetone.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:Pafchristian@gmail.com">Pafchristian@gmail.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div>
       </div>
-      <div class="footer-bottom"><span>© 2025 GraceTone JMP. Tous droits réservés.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div>
+      <div class="footer-bottom"><span>© 2026 GraceTone JMP. Tous droits réservés.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div>
     </div>
   </footer>
 </div><!-- /contact -->
