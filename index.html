@@ -1,1110 +1,1198 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GraceTone — Jazz Music Production</title>
-  <meta name="description" content="GraceTone JMP — Label de musique jazz afro-sahélien basé au Tchad. Production, formation, distribution d'artistes jazz à caractère évangélique.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --gold: #C9A84C;
-      --gold-light: #E8CC7A;
-      --gold-pale: #F5E9C8;
-      --black: #0A0804;
-      --dark: #110E08;
-      --dark2: #1A1610;
-      --dark3: #26211A;
-      --cream: #F2EAD8;
-      --cream2: #D9CEBC;
-      --muted: #7A6E5E;
-      --white: #FDFAF4;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--black);
-      color: var(--cream);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      overflow-x: hidden;
-      cursor: none;
-    }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GraceTone JMP — Jazz Music Production</title>
+<meta name="description" content="GraceTone Jazz Music Production — Label afro-sahélien basé au Tchad. Production, formation, distribution d'artistes jazz à caractère évangélique."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   VARIABLES & RESET
+============================================================ */
+:root {
+  --gold:#C9A84C; --gold-l:#E8CC7A; --gold-p:#F5E9C8;
+  --black:#0A0804; --dark:#110E08; --dark2:#1A1610; --dark3:#26211A;
+  --cream:#F2EAD8; --cream2:#D9CEBC; --muted:#7A6E5E; --white:#FDFAF4;
+  --nav-h:74px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--black);color:var(--cream);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:'DM Sans',sans-serif;cursor:pointer}
 
-    /* CURSOR */
-    .cursor { position: fixed; top: 0; left: 0; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transition: transform 0.1s ease; mix-blend-mode: difference; }
-    .cursor-ring { position: fixed; top: 0; left: 0; width: 36px; height: 36px; border: 1px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 9998; transition: transform 0.15s ease, width 0.3s, height 0.3s; opacity: 0.6; }
+/* ============================================================
+   CURSOR
+============================================================ */
+#cur{position:fixed;top:0;left:0;width:10px;height:10px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:difference;transition:width .2s,height .2s}
+#cur-ring{position:fixed;top:0;left:0;width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:9998;opacity:.55;transition:width .3s,height .3s}
+body.hovering #cur{width:6px;height:6px}
+body.hovering #cur-ring{width:56px;height:56px}
 
-    /* NOISE */
-    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.4; }
+/* ============================================================
+   NOISE TEXTURE
+============================================================ */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.35}
 
-    /* NAV */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 4rem; transition: background 0.4s; }
-    nav.scrolled { background: rgba(10,8,4,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,168,76,0.15); }
-    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.12em; color: var(--gold); text-decoration: none; }
-    .nav-logo span { color: var(--cream); font-size: 0.55em; display: block; letter-spacing: 0.3em; margin-top: -4px; }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a { text-decoration: none; color: var(--cream2); font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.3s; position: relative; }
-    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s; }
-    .nav-links a:hover { color: var(--gold); }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-cta { border: 1px solid var(--gold); color: var(--gold) !important; padding: 0.5rem 1.4rem; border-radius: 2px; transition: background 0.3s, color 0.3s !important; }
-    .nav-cta:hover { background: var(--gold); color: var(--black) !important; }
+/* ============================================================
+   NAV
+============================================================ */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 4rem;height:var(--nav-h);transition:background .4s,border-color .4s}
+nav.solid{background:rgba(10,8,4,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,.14)}
+.nav-logo{display:flex;flex-direction:column;line-height:1}
+.nav-logo strong{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;letter-spacing:.12em;color:var(--gold)}
+.nav-logo span{font-size:.52rem;letter-spacing:.35em;text-transform:uppercase;color:var(--cream2);margin-top:-2px}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream2);position:relative;padding:.3rem 0;transition:color .25s}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-links a.active::after,.nav-links a:hover::after{width:100%}
+.nav-cta{border:1px solid var(--gold)!important;color:var(--gold)!important;padding:.42rem 1.3rem!important;transition:background .25s!important}
+.nav-cta:hover{background:var(--gold)!important;color:var(--black)!important}
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:.4rem}
+.nav-burger span{display:block;width:24px;height:1px;background:var(--cream)}
+.mob-menu{display:none;position:fixed;inset:0;background:var(--dark);z-index:490;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mob-menu.open{display:flex}
+.mob-menu a{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:.1em;color:var(--cream);transition:color .2s}
+.mob-menu a:hover{color:var(--gold)}
+.mob-close{position:absolute;top:1.5rem;right:2rem;background:none;border:none;color:var(--cream);font-size:1.8rem}
 
-    /* HERO */
-    #hero { position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; text-align: center; }
-    .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.08) 0%, transparent 70%), radial-gradient(ellipse 100% 100% at 100% 100%, rgba(201,168,76,0.04) 0%, transparent 60%); }
-    .vinyl-anim { position: absolute; width: 600px; height: 600px; border-radius: 50%; border: 1px solid rgba(201,168,76,0.08); top: 50%; left: 50%; transform: translate(-50%, -50%); animation: vinylPulse 8s ease-in-out infinite; }
-    .vinyl-anim:nth-child(2) { width: 800px; height: 800px; animation-delay: -2s; opacity: 0.5; }
-    .vinyl-anim:nth-child(3) { width: 1000px; height: 1000px; animation-delay: -4s; opacity: 0.25; }
-    @keyframes vinylPulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; } 50% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; } }
-    .music-lines { position: absolute; bottom: 0; left: 0; right: 0; height: 120px; overflow: hidden; }
-    .music-lines svg { width: 100%; height: 100%; }
-    .hero-content { position: relative; z-index: 2; }
-    .hero-tag { font-size: 0.7rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 1s 0.3s forwards; }
-    .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 14vw, 11rem); line-height: 0.9; letter-spacing: 0.04em; color: var(--white); opacity: 0; animation: fadeUp 1s 0.6s forwards; }
-    .hero-title .accent { color: var(--gold); }
-    .hero-subtitle { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 2vw, 1.4rem); font-style: italic; color: var(--cream2); margin-top: 1rem; letter-spacing: 0.1em; opacity: 0; animation: fadeUp 1s 0.9s forwards; }
-    .hero-tagline { font-size: 0.78rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-top: 0.6rem; opacity: 0; animation: fadeUp 1s 1.0s forwards; }
-    .hero-btns { margin-top: 3rem; display: flex; gap: 1.5rem; justify-content: center; opacity: 0; animation: fadeUp 1s 1.2s forwards; }
-    .btn-primary { background: var(--gold); color: var(--black); padding: 0.9rem 2.8rem; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; font-weight: 500; border: none; cursor: pointer; text-decoration: none; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px)); transition: background 0.3s, transform 0.2s; display: inline-block; }
-    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
-    .btn-ghost { background: transparent; color: var(--cream); padding: 0.9rem 2.8rem; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; border: 1px solid rgba(242,234,216,0.3); cursor: pointer; text-decoration: none; transition: border-color 0.3s, color 0.3s; display: inline-block; }
-    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
-    .scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; opacity: 0; animation: fadeUp 1s 1.8s forwards; }
-    .scroll-hint span { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); }
-    .scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollAnim 2s ease-in-out infinite; }
-    @keyframes scrollAnim { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+/* ============================================================
+   PAGE TRANSITION ENGINE
+============================================================ */
+#app{position:relative;min-height:100vh}
+.page{position:absolute;top:0;left:0;width:100%;min-height:100vh;opacity:0;transform:translateY(24px);pointer-events:none;transition:opacity .55s cubic-bezier(.4,0,.2,1),transform .55s cubic-bezier(.4,0,.2,1)}
+.page.active{opacity:1;transform:translateY(0);pointer-events:all;position:relative}
+.page.exit{opacity:0;transform:translateY(-20px)}
 
-    /* COMMONS */
-    section { position: relative; z-index: 1; }
-    .section-label { font-size: 0.65rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
-    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 6vw, 4.5rem); letter-spacing: 0.04em; line-height: 1; color: var(--white); }
-    .section-title .italic { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--gold); font-size: 1.1em; }
-    .container { max-width: 1280px; margin: 0 auto; padding: 0 4rem; }
-    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .divider { width: 60px; height: 2px; background: linear-gradient(to right, var(--gold), transparent); margin: 1.5rem 0; }
+/* ============================================================
+   SHARED UTILITIES
+============================================================ */
+.container{max-width:1240px;margin:0 auto;padding:0 4rem}
+.pt{padding-top:calc(var(--nav-h) + 4rem)}
+.section-label{font-size:.65rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem;display:block}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,5.5vw,4.2rem);letter-spacing:.04em;line-height:1;color:var(--white)}
+.section-title .it{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);font-size:1.08em}
+.divider{width:56px;height:2px;background:linear-gradient(to right,var(--gold),transparent);margin:1.4rem 0}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+.btn-gold{display:inline-block;background:var(--gold);color:var(--black);padding:.85rem 2.6rem;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;border:none;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:background .25s,transform .2s}
+.btn-gold:hover{background:var(--gold-l);transform:translateY(-2px)}
+.btn-outline{display:inline-block;background:transparent;color:var(--cream);padding:.85rem 2.6rem;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;border:1px solid rgba(242,234,216,.28);transition:border-color .25s,color .25s}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.page-hero{padding:calc(var(--nav-h) + 5rem) 0 5rem;position:relative;overflow:hidden}
+.page-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 60% 40%,rgba(201,168,76,.07) 0%,transparent 70%);pointer-events:none}
 
-    /* MARQUEE */
-    .marquee-section { overflow: hidden; background: var(--gold); padding: 1rem 0; }
-    .marquee-track { display: flex; gap: 3rem; animation: marqueeScroll 20s linear infinite; width: max-content; }
-    .marquee-track span { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.15em; color: var(--black); white-space: nowrap; }
-    .marquee-track span.dot { opacity: 0.4; }
-    @keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+/* ============================================================
+   SCROLL INDICATOR (top)
+============================================================ */
+#progress-bar{position:fixed;top:0;left:0;height:2px;background:var(--gold);z-index:600;transition:width .1s linear;width:0}
 
-    /* ABOUT */
-    #about { padding: 10rem 0 8rem; }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
-    .about-text p { line-height: 1.9; color: var(--cream2); font-size: 1rem; margin-bottom: 1.2rem; }
-    .about-text p strong { color: var(--gold); font-weight: 500; }
-    .about-visual { position: relative; }
-    .about-card { background: var(--dark2); border: 1px solid rgba(201,168,76,0.15); padding: 3rem; position: relative; }
-    .about-card::before { content: ''; position: absolute; top: -1px; left: 2rem; right: 2rem; height: 2px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
-    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
-    .stat { text-align: center; }
-    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: var(--gold); display: block; line-height: 1; }
-    .stat-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; display: block; }
-    .floating-note { position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 8rem; color: rgba(201,168,76,0.06); top: -3rem; right: -2rem; pointer-events: none; user-select: none; animation: floatNote 6s ease-in-out infinite; }
-    @keyframes floatNote { 0%, 100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-15px) rotate(-3deg); } }
+/* ============================================================
+   ░░░ PAGE 1 — ACCUEIL ░░░
+============================================================ */
+#page-home{padding:0}
+.home-hero{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.rings{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.ring{position:absolute;border-radius:50%;border:1px solid rgba(201,168,76,.09);animation:ringPulse 7s ease-in-out infinite}
+.ring:nth-child(1){width:500px;height:500px}
+.ring:nth-child(2){width:750px;height:750px;animation-delay:-2.3s;opacity:.6}
+.ring:nth-child(3){width:1000px;height:1000px;animation-delay:-4.6s;opacity:.3}
+@keyframes ringPulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.04);opacity:1}}
+.vinyl-spin{position:absolute;width:340px;height:340px;border-radius:50%;border:1px solid rgba(201,168,76,.06);opacity:.4;animation:spin 30s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.home-hero-content{position:relative;z-index:2}
+.home-eyebrow{font-size:.68rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:1.6rem;opacity:0;animation:fadeUp .9s .3s forwards}
+.home-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(5.5rem,15vw,12rem);line-height:.88;letter-spacing:.04em;color:var(--white);opacity:0;animation:fadeUp .9s .55s forwards}
+.home-title .g{color:var(--gold)}
+.home-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1rem,1.8vw,1.35rem);color:var(--cream2);margin-top:1.1rem;letter-spacing:.08em;opacity:0;animation:fadeUp .9s .8s forwards}
+.home-tagline{font-size:.68rem;letter-spacing:.4em;text-transform:uppercase;color:var(--muted);margin-top:.8rem;opacity:0;animation:fadeUp .9s 1s forwards}
+.home-btns{margin-top:3rem;display:flex;gap:1.4rem;justify-content:center;opacity:0;animation:fadeUp .9s 1.2s forwards}
+.home-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;animation:fadeUp .9s 1.8s forwards}
+.home-scroll span{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--muted)}
+.scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollDrop 2s ease-in-out infinite}
+@keyframes scrollDrop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 
-    /* VISION */
-    #vision { padding: 6rem 0; background: var(--dark); }
-    .vision-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem; }
-    .vision-card { background: var(--dark2); border: 1px solid rgba(201,168,76,0.1); padding: 2.5rem; position: relative; overflow: hidden; transition: border-color 0.3s; }
-    .vision-card:hover { border-color: rgba(201,168,76,0.3); }
-    .vision-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transition: transform 0.4s; }
-    .vision-card:hover::after { transform: scaleX(1); }
-    .vision-icon { font-size: 2rem; margin-bottom: 1.2rem; display: block; }
-    .vision-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--white); margin-bottom: 0.8rem; }
-    .vision-desc { font-size: 0.85rem; line-height: 1.8; color: var(--muted); }
+/* Marquee */
+.marquee-bar{overflow:hidden;background:var(--gold);padding:.9rem 0}
+.marquee-inner{display:flex;gap:2.5rem;width:max-content;animation:marquee 22s linear infinite}
+.marquee-inner span{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:.14em;color:var(--black);white-space:nowrap}
+.marquee-inner .dot{opacity:.35}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-    /* SERVICES */
-    #services { padding: 8rem 0; }
-    #services::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 40% at 80% 50%, rgba(201,168,76,0.05) 0%, transparent 70%); pointer-events: none; }
-    .services-header { text-align: center; margin-bottom: 5rem; }
-    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; }
-    .service-card { background: var(--dark2); padding: 3rem 2.5rem; border: 1px solid rgba(201,168,76,0.08); position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.3s; cursor: default; }
-    .service-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transition: transform 0.4s; }
-    .service-card:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-4px); }
-    .service-card:hover::after { transform: scaleX(1); }
-    .service-icon { font-size: 2rem; margin-bottom: 1.5rem; display: block; }
-    .service-num { position: absolute; top: 2rem; right: 2rem; font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: rgba(201,168,76,0.05); line-height: 1; }
-    .service-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--white); margin-bottom: 1rem; }
-    .service-desc { font-size: 0.88rem; line-height: 1.8; color: var(--muted); }
-    .service-tag { display: inline-block; margin-top: 1.5rem; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.3); padding: 0.3rem 0.8rem; }
+/* Home stats strip */
+.home-stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(201,168,76,.1);border-bottom:1px solid rgba(201,168,76,.1)}
+.home-stat{padding:3rem 2rem;text-align:center;border-right:1px solid rgba(201,168,76,.1);position:relative}
+.home-stat:last-child{border-right:none}
+.home-stat-num{font-family:'Bebas Neue',sans-serif;font-size:3.8rem;color:var(--gold);line-height:1;display:block}
+.home-stat-label{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:.4rem;display:block}
 
-    /* MODELE ECONOMIQUE */
-    #modele { padding: 8rem 0; background: var(--dark); }
-    .modele-header { text-align: center; margin-bottom: 5rem; }
-    .modele-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-    .modele-item { background: var(--dark2); border: 1px solid rgba(201,168,76,0.1); padding: 2rem 2.5rem; display: flex; align-items: flex-start; gap: 1.5rem; transition: border-color 0.3s, transform 0.3s; }
-    .modele-item:hover { border-color: rgba(201,168,76,0.3); transform: translateX(4px); }
-    .modele-num { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--gold); opacity: 0.5; flex-shrink: 0; line-height: 1; }
-    .modele-text .modele-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--white); margin-bottom: 0.4rem; }
-    .modele-text .modele-desc { font-size: 0.82rem; line-height: 1.7; color: var(--muted); }
+/* Home featured */
+.home-featured{padding:7rem 0}
+.home-featured-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.home-featured-text .section-title{margin-bottom:1.5rem}
+.home-featured-text p{line-height:1.9;color:var(--cream2);font-size:.95rem;margin-bottom:1.2rem}
+.home-featured-text p strong{color:var(--gold-p);font-weight:400}
+.home-cards{display:flex;flex-direction:column;gap:1px}
+.home-card{display:flex;align-items:center;gap:1.6rem;padding:1.6rem 2rem;background:var(--dark2);border:1px solid rgba(201,168,76,.08);transition:border-color .3s,background .3s;cursor:pointer}
+.home-card:hover{background:var(--dark3);border-color:rgba(201,168,76,.25)}
+.home-card-icon{font-size:1.6rem;flex-shrink:0;width:48px;text-align:center}
+.home-card-title{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--white)}
+.home-card-sub{font-size:.75rem;color:var(--muted);margin-top:.2rem}
+.home-card-arr{margin-left:auto;color:var(--gold);opacity:0;transition:opacity .25s,transform .25s}
+.home-card:hover .home-card-arr{opacity:1;transform:translateX(4px)}
 
-    /* TRAJECTOIRE */
-    #trajectoire { padding: 8rem 0; }
-    .traj-header { text-align: center; margin-bottom: 5rem; }
-    .timeline { position: relative; padding: 2rem 0; }
-    .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(201,168,76,0.2); transform: translateX(-50%); }
-    .traj-phase { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 3rem; margin-bottom: 4rem; }
-    .traj-phase:nth-child(odd) .traj-content { text-align: right; grid-column: 1; }
-    .traj-phase:nth-child(odd) .traj-empty { grid-column: 3; }
-    .traj-phase:nth-child(even) .traj-empty { grid-column: 1; }
-    .traj-phase:nth-child(even) .traj-content { grid-column: 3; }
-    .traj-dot { width: 16px; height: 16px; background: var(--gold); border-radius: 50%; position: relative; flex-shrink: 0; }
-    .traj-dot::before { content: ''; position: absolute; inset: -6px; border: 1px solid rgba(201,168,76,0.3); border-radius: 50%; }
-    .traj-content { background: var(--dark2); border: 1px solid rgba(201,168,76,0.12); padding: 2rem; }
-    .traj-period { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
-    .traj-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--white); margin-bottom: 0.8rem; }
-    .traj-desc { font-size: 0.83rem; line-height: 1.8; color: var(--muted); }
-    .traj-empty { opacity: 0; }
+/* Pillars */
+.home-pillars{padding:0 0 7rem}
+.pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;margin-top:4rem}
+.pillar{background:var(--dark2);padding:3rem 2.5rem;border:1px solid rgba(201,168,76,.08);position:relative;overflow:hidden;transition:border-color .3s}
+.pillar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .4s}
+.pillar:hover{border-color:rgba(201,168,76,.28)}
+.pillar:hover::after{transform:scaleX(1)}
+.pillar-icon{font-size:2.2rem;margin-bottom:1.5rem;display:block}
+.pillar-num{position:absolute;top:1.5rem;right:1.8rem;font-family:'Bebas Neue',sans-serif;font-size:4.5rem;color:rgba(201,168,76,.05);line-height:1}
+.pillar-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--white);margin-bottom:.9rem}
+.pillar-desc{font-size:.85rem;line-height:1.8;color:var(--muted)}
 
-    /* ARTICLES */
-    #articles { padding: 8rem 0; background: var(--dark); }
-    .articles-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 4rem; }
-    .articles-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: auto auto; gap: 1.5px; }
-    .article-card { background: var(--dark2); border: 1px solid rgba(201,168,76,0.08); overflow: hidden; position: relative; transition: border-color 0.3s; cursor: pointer; }
-    .article-card:hover { border-color: rgba(201,168,76,0.3); }
-    .article-card:first-child { grid-row: span 2; }
-    .article-img { width: 100%; height: 220px; background: var(--dark3); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-    .article-card:first-child .article-img { height: 320px; }
-    .article-img-placeholder { font-family: 'Bebas Neue', sans-serif; font-size: 5rem; color: rgba(201,168,76,0.08); }
-    .article-img-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, var(--dark2)); }
-    .article-body { padding: 1.8rem; }
-    .article-cat { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
-    .article-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; line-height: 1.4; color: var(--white); margin-bottom: 0.8rem; }
-    .article-card:first-child .article-title { font-size: 1.8rem; }
-    .article-excerpt { font-size: 0.83rem; line-height: 1.8; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-    .article-meta { display: flex; align-items: center; gap: 1rem; margin-top: 1.2rem; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; }
-    .article-meta::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+/* ============================================================
+   ░░░ PAGE 2 — À PROPOS ░░░
+============================================================ */
+#page-about .page-hero{background:radial-gradient(ellipse 80% 60% at 30% 50%,rgba(201,168,76,.07) 0%,transparent 65%)}
+.about-intro{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;padding:5rem 0 6rem}
+.about-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-style:italic;color:var(--cream2);line-height:1.5;border-left:2px solid var(--gold);padding-left:2rem;margin-bottom:2.5rem}
+.about-body p{line-height:1.95;color:var(--cream2);font-size:.95rem;margin-bottom:1.3rem}
+.about-body p strong{color:var(--gold-p);font-weight:400}
+.about-side{position:sticky;top:calc(var(--nav-h) + 2rem)}
+.about-card{background:var(--dark2);border:1px solid rgba(201,168,76,.12);padding:2.5rem;position:relative}
+.about-card::before{content:'';position:absolute;top:-1px;left:2rem;right:2rem;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent)}
+.about-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem}
+.about-stat{text-align:center;padding:1.2rem;background:var(--dark3)}
+.about-stat-n{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--gold);line-height:1;display:block}
+.about-stat-l{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);display:block;margin-top:.2rem}
+.about-vision{background:var(--dark3);padding:1.5rem;margin-top:1.5rem;border-left:2px solid var(--gold)}
+.about-vision p{font-size:.82rem;line-height:1.7;color:var(--cream2);font-style:italic}
+.about-timeline{padding:5rem 0;border-top:1px solid rgba(201,168,76,.08)}
+.timeline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;margin-top:3.5rem}
+.tl-phase{background:var(--dark2);padding:2.5rem;border:1px solid rgba(201,168,76,.08);position:relative}
+.tl-phase.center-phase{background:var(--dark3);border-color:rgba(201,168,76,.2)}
+.tl-tag{font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block}
+.tl-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--white);margin-bottom:.8rem}
+.tl-desc{font-size:.83rem;line-height:1.8;color:var(--muted)}
+.tl-dot{width:10px;height:10px;background:var(--gold);border-radius:50%;margin-bottom:1.2rem}
 
-    /* MAGAZINE */
-    #magazine { padding: 8rem 0; }
-    .mag-header { text-align: center; margin-bottom: 5rem; }
-    .mag-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-    .mag-card { border: 1px solid rgba(201,168,76,0.12); background: var(--dark2); overflow: hidden; transition: transform 0.4s, border-color 0.3s; cursor: pointer; position: relative; }
-    .mag-card:hover { transform: translateY(-8px); border-color: rgba(201,168,76,0.4); }
-    .mag-cover { height: 280px; background: var(--dark3); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-    .mag-cover-art { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-    .mag-cover-art svg { width: 100%; height: 100%; }
-    .mag-info { padding: 1.5rem; }
-    .mag-issue { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
-    .mag-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--white); margin-bottom: 0.5rem; }
-    .mag-date { font-size: 0.72rem; color: var(--muted); }
-    .mag-badge { position: absolute; top: 1rem; right: 1rem; background: var(--gold); color: var(--black); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.3rem 0.7rem; font-weight: 500; }
+/* ============================================================
+   ░░░ PAGE 3 — SERVICES ░░░
+============================================================ */
+#page-services .page-hero{background:radial-gradient(ellipse 60% 50% at 80% 40%,rgba(201,168,76,.06) 0%,transparent 70%)}
+.services-intro{max-width:640px;margin-bottom:4rem}
+.services-intro p{color:var(--cream2);line-height:1.9;font-size:.95rem}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px}
+.svc-card{background:var(--dark2);padding:2.8rem 2.4rem;border:1px solid rgba(201,168,76,.08);position:relative;overflow:hidden;transition:border-color .3s,transform .3s}
+.svc-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .4s}
+.svc-card:hover{border-color:rgba(201,168,76,.28);transform:translateY(-4px)}
+.svc-card:hover::after{transform:scaleX(1)}
+.svc-n{position:absolute;top:1.8rem;right:1.8rem;font-family:'Bebas Neue',sans-serif;font-size:4rem;color:rgba(201,168,76,.05);line-height:1}
+.svc-icon{font-size:2rem;margin-bottom:1.4rem;display:block}
+.svc-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--white);margin-bottom:.9rem}
+.svc-desc{font-size:.83rem;line-height:1.8;color:var(--muted)}
+.svc-tag{display:inline-block;margin-top:1.4rem;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,.28);padding:.28rem .8rem}
 
-    /* EVENTS */
-    #events { padding: 8rem 0; background: var(--dark); }
-    .events-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 4rem; }
-    .events-list { display: flex; flex-direction: column; gap: 1px; }
-    .event-row { display: grid; grid-template-columns: 120px 1fr auto auto; align-items: center; gap: 2.5rem; padding: 2rem 2.5rem; background: var(--dark2); border: 1px solid rgba(201,168,76,0.08); transition: border-color 0.3s, background 0.3s; cursor: pointer; position: relative; overflow: hidden; }
-    .event-row::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--gold); transform: scaleY(0); transition: transform 0.3s; }
-    .event-row:hover { background: var(--dark3); border-color: rgba(201,168,76,0.25); }
-    .event-row:hover::before { transform: scaleY(1); }
-    .event-date { text-align: center; }
-    .event-day { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--gold); line-height: 1; display: block; }
-    .event-month { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); display: block; }
-    .event-info .event-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--white); margin-bottom: 0.4rem; }
-    .event-location { font-size: 0.8rem; color: var(--muted); }
-    .event-location span { color: var(--gold-pale); }
-    .event-genre { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.3); padding: 0.4rem 1rem; white-space: nowrap; }
-    .event-cta { background: transparent; border: 1px solid rgba(201,168,76,0.4); color: var(--gold); padding: 0.6rem 1.5rem; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: background 0.3s, color 0.3s; white-space: nowrap; font-family: 'DM Sans', sans-serif; }
-    .event-cta:hover { background: var(--gold); color: var(--black); }
+/* Modele eco */
+.modele-section{padding:6rem 0;border-top:1px solid rgba(201,168,76,.08)}
+.modele-list{display:flex;flex-direction:column;gap:1px;margin-top:3.5rem}
+.modele-row{display:flex;align-items:center;gap:2.5rem;padding:1.8rem 2.4rem;background:var(--dark2);border:1px solid rgba(201,168,76,.07);transition:border-color .3s,background .3s;cursor:default}
+.modele-row:hover{background:var(--dark3);border-color:rgba(201,168,76,.22)}
+.modele-row-n{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:rgba(201,168,76,.2);flex-shrink:0;width:3rem;line-height:1}
+.modele-row-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:.3rem}
+.modele-row-desc{font-size:.8rem;color:var(--muted);line-height:1.6}
+.modele-row-tag{margin-left:auto;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,.25);padding:.28rem .8rem;white-space:nowrap;flex-shrink:0}
 
-    /* NEWSLETTER */
-    #newsletter { padding: 8rem 0; }
-    .newsletter-inner { max-width: 700px; margin: 0 auto; text-align: center; }
-    .newsletter-inner p { color: var(--muted); margin-bottom: 3rem; font-size: 0.95rem; line-height: 1.8; margin-top: 1.5rem; }
-    .newsletter-form { display: flex; gap: 0; border: 1px solid rgba(201,168,76,0.25); }
-    .newsletter-form input { flex: 1; background: transparent; border: none; padding: 1rem 1.5rem; color: var(--cream); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; outline: none; }
-    .newsletter-form input::placeholder { color: var(--muted); }
-    .newsletter-form button { background: var(--gold); color: var(--black); border: none; padding: 1rem 2.5rem; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; font-weight: 500; cursor: pointer; transition: background 0.3s; }
-    .newsletter-form button:hover { background: var(--gold-light); }
+/* ============================================================
+   ░░░ PAGE 4 — ARTISTES ░░░
+============================================================ */
+#page-artists .page-hero{background:radial-gradient(ellipse 70% 50% at 50% 60%,rgba(201,168,76,.07) 0%,transparent 70%)}
+.artists-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;margin-bottom:5rem}
+.artist-card{background:var(--dark2);border:1px solid rgba(201,168,76,.08);overflow:hidden;position:relative;cursor:pointer;transition:border-color .3s}
+.artist-card:hover{border-color:rgba(201,168,76,.3)}
+.artist-avatar{height:260px;background:var(--dark3);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.artist-avatar-placeholder{font-family:'Bebas Neue',sans-serif;font-size:6rem;color:rgba(201,168,76,.09);user-select:none}
+.artist-avatar-overlay{position:absolute;inset:0;background:linear-gradient(to top,var(--dark2) 0%,transparent 50%)}
+.artist-info{padding:1.8rem}
+.artist-name{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--white);margin-bottom:.3rem}
+.artist-role{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.artist-bio{font-size:.82rem;line-height:1.7;color:var(--muted);margin-top:.8rem}
+.artist-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}
+.artist-tag{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cream2);background:var(--dark3);border:1px solid rgba(201,168,76,.12);padding:.2rem .7rem}
 
-    /* FOOTER */
-    footer { background: var(--black); border-top: 1px solid rgba(201,168,76,0.12); padding: 5rem 0 3rem; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
-    .footer-brand p { font-size: 0.85rem; line-height: 1.8; color: var(--muted); max-width: 280px; margin-top: 1rem; }
-    .footer-col h4 { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
-    .footer-col ul li a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
-    .footer-col ul li a:hover { color: var(--gold); }
-    .footer-bottom { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(201,168,76,0.08); padding-top: 2rem; font-size: 0.75rem; color: var(--muted); }
-    .social-links { display: flex; gap: 1.5rem; }
-    .social-links a { color: var(--muted); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.3s; }
-    .social-links a:hover { color: var(--gold); }
+/* Call for artists */
+.cfa-band{background:var(--dark);border:1px solid rgba(201,168,76,.15);padding:4rem;text-align:center;margin-bottom:6rem;position:relative;overflow:hidden}
+.cfa-band::before{content:'♪';position:absolute;font-family:'Bebas Neue',sans-serif;font-size:12rem;color:rgba(201,168,76,.03);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.cfa-band h3{font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-style:italic;color:var(--white);margin-bottom:1rem}
+.cfa-band p{color:var(--muted);font-size:.9rem;line-height:1.8;max-width:560px;margin:0 auto 2rem}
 
-    /* AUDIO PLAYER */
-    .player-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(17,14,8,0.95); backdrop-filter: blur(16px); border-top: 1px solid rgba(201,168,76,0.2); padding: 0.8rem 4rem; display: flex; align-items: center; gap: 2rem; z-index: 200; transform: translateY(100%); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-    .player-bar.visible { transform: translateY(0); }
-    .player-art { width: 40px; height: 40px; background: var(--dark3); border: 1px solid rgba(201,168,76,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
-    .player-info { flex-shrink: 0; }
-    .player-title { font-size: 0.8rem; color: var(--cream); font-weight: 500; }
-    .player-artist { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
-    .player-controls { display: flex; gap: 1rem; align-items: center; }
-    .player-btn { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
-    .player-btn:hover { color: var(--gold); }
-    .player-play { width: 36px; height: 36px; background: var(--gold); color: var(--black); border: none; border-radius: 50%; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
-    .player-play:hover { transform: scale(1.1); }
-    .player-progress { flex: 1; height: 2px; background: rgba(201,168,76,0.15); position: relative; cursor: pointer; }
-    .player-fill { height: 100%; width: 35%; background: var(--gold); position: relative; transition: width 0.1s linear; }
-    .player-fill::after { content: ''; position: absolute; right: -4px; top: -3px; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; }
-    .player-time { font-size: 0.7rem; color: var(--muted); white-space: nowrap; }
-    .player-close { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1rem; transition: color 0.2s; flex-shrink: 0; }
-    .player-close:hover { color: var(--gold); }
+/* ============================================================
+   ░░░ PAGE 5 — ARTICLES ░░░
+============================================================ */
+#page-articles .page-hero{background:radial-gradient(ellipse 60% 50% at 20% 50%,rgba(201,168,76,.07) 0%,transparent 70%)}
+.articles-filters{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:3.5rem}
+.filter-btn{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;border:1px solid rgba(201,168,76,.2);background:transparent;color:var(--muted);padding:.4rem 1.2rem;transition:border-color .25s,color .25s,background .25s}
+.filter-btn:hover,.filter-btn.active{border-color:var(--gold);color:var(--gold)}
+.filter-btn.active{background:rgba(201,168,76,.08)}
+.articles-main-grid{display:grid;grid-template-columns:2fr 1fr;gap:1.5px;margin-bottom:1.5px}
+.article-featured{background:var(--dark2);border:1px solid rgba(201,168,76,.08);overflow:hidden;cursor:pointer;transition:border-color .3s}
+.article-featured:hover{border-color:rgba(201,168,76,.3)}
+.af-img{height:320px;background:var(--dark3);display:flex;align-items:center;justify-content:center;position:relative}
+.af-img-ph{font-family:'Bebas Neue',sans-serif;font-size:7rem;color:rgba(201,168,76,.07)}
+.af-img-ov{position:absolute;inset:0;background:linear-gradient(to top,var(--dark2) 0%,transparent 55%)}
+.af-body{padding:2rem}
+.af-cat{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem}
+.af-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;line-height:1.3;color:var(--white);margin-bottom:.8rem}
+.af-excerpt{font-size:.83rem;line-height:1.8;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.af-meta{display:flex;gap:1rem;margin-top:1.2rem;font-size:.7rem;color:var(--muted);align-items:center}
+.af-meta::before{content:'';display:block;width:18px;height:1px;background:var(--gold)}
+.articles-side{display:flex;flex-direction:column;gap:1.5px}
+.article-sm{background:var(--dark2);border:1px solid rgba(201,168,76,.08);padding:1.6rem;cursor:pointer;transition:border-color .3s,background .3s}
+.article-sm:hover{background:var(--dark3);border-color:rgba(201,168,76,.25)}
+.article-sm-cat{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.article-sm-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--white);line-height:1.3;margin-bottom:.5rem}
+.article-sm-meta{font-size:.7rem;color:var(--muted)}
+.articles-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px}
 
-    /* RESPONSIVE */
-    @media (max-width: 1024px) {
-      .container { padding: 0 2rem; }
-      nav { padding: 1.2rem 2rem; }
-      .nav-links { display: none; }
-      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .services-grid { grid-template-columns: 1fr 1fr; }
-      .vision-grid { grid-template-columns: 1fr 1fr; }
-      .modele-grid { grid-template-columns: 1fr; }
-      .articles-grid { grid-template-columns: 1fr 1fr; }
-      .articles-grid .article-card:first-child { grid-row: auto; }
-      .mag-grid { grid-template-columns: 1fr 1fr; }
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
-      .event-row { grid-template-columns: 80px 1fr; gap: 1.5rem; }
-      .event-genre, .event-cta { display: none; }
-      .player-bar { padding: 0.8rem 1.5rem; }
-      .timeline::before { left: 20px; }
-      .traj-phase { grid-template-columns: auto 1fr; }
-      .traj-empty { display: none; }
-      .traj-phase:nth-child(odd) .traj-content { text-align: left; grid-column: 2; }
-    }
-    @media (max-width: 640px) {
-      .services-grid { grid-template-columns: 1fr; }
-      .vision-grid { grid-template-columns: 1fr; }
-      .articles-grid { grid-template-columns: 1fr; }
-      .mag-grid { grid-template-columns: 1fr 1fr; }
-      .hero-btns { flex-direction: column; align-items: center; }
-      .newsletter-form { flex-direction: column; }
-    }
-  </style>
+/* ============================================================
+   ░░░ PAGE 6 — MAGAZINE ░░░
+============================================================ */
+#page-magazine .page-hero{background:radial-gradient(ellipse 60% 50% at 70% 40%,rgba(201,168,76,.07) 0%,transparent 70%)}
+.mag-featured{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;padding:5rem 0 6rem}
+.mag-cover-big{position:relative;height:500px;background:var(--dark2);border:1px solid rgba(201,168,76,.15);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.mag-cover-big svg{width:100%;height:100%;position:absolute;inset:0}
+.mag-cover-badge{position:absolute;top:1.5rem;right:1.5rem;background:var(--gold);color:var(--black);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:.4rem 1rem;font-weight:500}
+.mag-feat-label{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block}
+.mag-feat-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3rem);color:var(--white);line-height:1;margin-bottom:1rem}
+.mag-feat-sub{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--cream2);font-size:1.1rem;margin-bottom:1.5rem}
+.mag-feat-desc{color:var(--muted);font-size:.88rem;line-height:1.85;margin-bottom:2rem}
+.mag-feat-meta{display:flex;gap:2rem;padding:1.5rem 0;border-top:1px solid rgba(201,168,76,.1);border-bottom:1px solid rgba(201,168,76,.1);margin-bottom:2rem}
+.mag-feat-meta-item span{display:block;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem}
+.mag-feat-meta-item strong{font-size:.9rem;color:var(--cream)}
+.mag-archive{padding:5rem 0;border-top:1px solid rgba(201,168,76,.08)}
+.mag-archive-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem}
+.mag-card{background:var(--dark2);border:1px solid rgba(201,168,76,.08);overflow:hidden;cursor:pointer;transition:transform .4s,border-color .3s}
+.mag-card:hover{transform:translateY(-8px);border-color:rgba(201,168,76,.3)}
+.mag-cover{height:240px;background:var(--dark3);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.mag-cover svg{width:100%;height:100%;position:absolute}
+.mag-info{padding:1.4rem}
+.mag-issue{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+.mag-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--white);margin-bottom:.3rem}
+.mag-date{font-size:.7rem;color:var(--muted)}
+
+/* ============================================================
+   ░░░ PAGE 7 — ÉVÉNEMENTS ░░░
+============================================================ */
+#page-events .page-hero{background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(201,168,76,.08) 0%,transparent 65%)}
+.events-tabs{display:flex;gap:0;border-bottom:1px solid rgba(201,168,76,.12);margin-bottom:3rem}
+.events-tab{background:none;border:none;color:var(--muted);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;padding:1rem 2rem;position:relative;transition:color .25s}
+.events-tab::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .3s}
+.events-tab:hover{color:var(--cream)}
+.events-tab.active{color:var(--gold)}
+.events-tab.active::after{transform:scaleX(1)}
+.events-list{display:flex;flex-direction:column;gap:1px}
+.event-row{display:grid;grid-template-columns:110px 1fr auto auto;align-items:center;gap:2.5rem;padding:2rem 2.4rem;background:var(--dark2);border:1px solid rgba(201,168,76,.07);transition:background .3s,border-color .3s;cursor:pointer;position:relative;overflow:hidden}
+.event-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);transform:scaleY(0);transition:transform .3s}
+.event-row:hover{background:var(--dark3);border-color:rgba(201,168,76,.22)}
+.event-row:hover::before{transform:scaleY(1)}
+.event-date{text-align:center}
+.event-day{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--gold);line-height:1;display:block}
+.event-month{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:block}
+.event-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--white);margin-bottom:.3rem}
+.event-loc{font-size:.78rem;color:var(--muted)}
+.event-loc span{color:var(--gold-p)}
+.event-genre-tag{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,.28);padding:.35rem .9rem;white-space:nowrap;flex-shrink:0}
+.event-btn{background:transparent;border:1px solid rgba(201,168,76,.3);color:var(--gold);padding:.55rem 1.4rem;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;transition:background .25s,color .25s;white-space:nowrap;flex-shrink:0}
+.event-btn:hover{background:var(--gold);color:var(--black)}
+.events-cta-band{margin-top:5rem;background:var(--dark2);border:1px solid rgba(201,168,76,.12);padding:3.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem}
+.events-cta-band h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic;color:var(--white)}
+.events-cta-band p{color:var(--muted);font-size:.85rem;margin-top:.4rem}
+
+/* ============================================================
+   ░░░ PAGE 8 — CONTACT ░░░
+============================================================ */
+#page-contact .page-hero{background:radial-gradient(ellipse 60% 50% at 60% 40%,rgba(201,168,76,.06) 0%,transparent 70%)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;padding:5rem 0 6rem;align-items:start}
+.contact-info h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;color:var(--cream2);margin-bottom:2rem;line-height:1.5}
+.contact-item{display:flex;gap:1.2rem;align-items:flex-start;padding:1.5rem 0;border-bottom:1px solid rgba(201,168,76,.08)}
+.contact-item:last-child{border-bottom:none}
+.contact-icon{font-size:1.2rem;flex-shrink:0;margin-top:.1rem}
+.contact-label{font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}
+.contact-value{font-size:.9rem;color:var(--cream2);line-height:1.5}
+.contact-socials{margin-top:2.5rem}
+.contact-socials-title{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.social-row{display:flex;gap:1rem;flex-wrap:wrap}
+.social-btn{border:1px solid rgba(201,168,76,.2);color:var(--muted);padding:.5rem 1.2rem;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;transition:border-color .25s,color .25s}
+.social-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* Contact form */
+.contact-form{background:var(--dark2);border:1px solid rgba(201,168,76,.1);padding:3rem;position:relative}
+.contact-form::before{content:'';position:absolute;top:-1px;left:2rem;right:2rem;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.form-group{margin-bottom:1.4rem}
+.form-label{display:block;font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+.form-input,.form-textarea{width:100%;background:var(--dark3);border:1px solid rgba(201,168,76,.12);color:var(--cream);font-family:'DM Sans',sans-serif;font-size:.88rem;padding:.85rem 1.1rem;outline:none;transition:border-color .25s}
+.form-input:focus,.form-textarea:focus{border-color:rgba(201,168,76,.4)}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--muted)}
+.form-textarea{resize:vertical;min-height:130px}
+.form-select{appearance:none;background:var(--dark3) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23C9A84C'/%3E%3C/svg%3E") no-repeat right 1rem center;border:1px solid rgba(201,168,76,.12);color:var(--cream);font-family:'DM Sans',sans-serif;font-size:.88rem;padding:.85rem 1.1rem;width:100%;outline:none;cursor:pointer;transition:border-color .25s}
+.form-select:focus{border-color:rgba(201,168,76,.4)}
+.form-select option{background:var(--dark2)}
+.form-submit{width:100%;background:var(--gold);color:var(--black);border:none;padding:1rem;font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;transition:background .25s;margin-top:.5rem}
+.form-submit:hover{background:var(--gold-l)}
+.form-success{display:none;text-align:center;padding:2rem;color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic}
+
+/* Newsletter */
+.newsletter-strip{background:var(--dark);border-top:1px solid rgba(201,168,76,.1);border-bottom:1px solid rgba(201,168,76,.1);padding:5rem 0}
+.newsletter-inner{max-width:640px;margin:0 auto;text-align:center}
+.newsletter-inner p{color:var(--muted);font-size:.9rem;line-height:1.85;margin-bottom:2.5rem}
+.nl-form{display:flex;border:1px solid rgba(201,168,76,.22)}
+.nl-input{flex:1;background:transparent;border:none;padding:1rem 1.4rem;color:var(--cream);font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none}
+.nl-input::placeholder{color:var(--muted)}
+.nl-btn{background:var(--gold);color:var(--black);border:none;padding:1rem 2.2rem;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;transition:background .25s}
+.nl-btn:hover{background:var(--gold-l)}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:5rem 0 2.5rem;position:relative;z-index:1}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:4rem}
+.footer-brand-name{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.1em;color:var(--gold);display:block;margin-bottom:.3rem}
+.footer-brand-sub{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--cream2);display:block;margin-bottom:1.2rem}
+.footer-brand p{font-size:.82rem;line-height:1.8;color:var(--muted);max-width:270px}
+.footer-col h4{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.75rem}
+.footer-col ul li button,.footer-col ul li a{background:none;border:none;color:var(--muted);font-size:.83rem;font-family:'DM Sans',sans-serif;text-align:left;padding:0;cursor:pointer;transition:color .25s;text-decoration:none}
+.footer-col ul li button:hover,.footer-col ul li a:hover{color:var(--gold)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(201,168,76,.07);padding-top:2rem;font-size:.72rem;color:var(--muted)}
+.footer-socials{display:flex;gap:1.5rem}
+.footer-socials a{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);transition:color .25s}
+.footer-socials a:hover{color:var(--gold)}
+
+/* ============================================================
+   AUDIO PLAYER BAR
+============================================================ */
+.player{position:fixed;bottom:0;left:0;right:0;background:rgba(17,14,8,.95);backdrop-filter:blur(16px);border-top:1px solid rgba(201,168,76,.18);padding:.75rem 4rem;display:flex;align-items:center;gap:2rem;z-index:400;transform:translateY(100%);transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.player.on{transform:translateY(0)}
+.player-art{width:38px;height:38px;background:var(--dark3);border:1px solid rgba(201,168,76,.18);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.player-meta{flex-shrink:0}
+.player-track{font-size:.78rem;color:var(--cream);font-weight:500}
+.player-sub{font-size:.68rem;color:var(--muted);margin-top:1px}
+.player-ctrl{display:flex;gap:.8rem;align-items:center}
+.p-btn{background:none;border:none;color:var(--muted);font-size:.75rem;letter-spacing:.08em;transition:color .2s}
+.p-btn:hover{color:var(--gold)}
+.p-play{width:34px;height:34px;background:var(--gold);color:var(--black);border:none;border-radius:50%;font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:transform .2s}
+.p-play:hover{transform:scale(1.1)}
+.player-prog{flex:1;height:2px;background:rgba(201,168,76,.15);cursor:pointer;position:relative}
+.player-fill{height:100%;background:var(--gold);position:relative;transition:width .1s linear}
+.player-fill::after{content:'';position:absolute;right:-4px;top:-3px;width:8px;height:8px;background:var(--gold);border-radius:50%}
+.player-time{font-size:.68rem;color:var(--muted);white-space:nowrap}
+.p-close{background:none;border:none;color:var(--muted);font-size:.95rem;transition:color .2s;flex-shrink:0}
+.p-close:hover{color:var(--gold)}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media(max-width:1100px){
+  .container{padding:0 2.5rem}
+  nav{padding:0 2.5rem}
+  .player{padding:.75rem 2rem}
+  .about-intro,.contact-grid,.home-featured-grid,.mag-featured{grid-template-columns:1fr;gap:3rem}
+  .about-side{position:static}
+  .svc-grid{grid-template-columns:1fr 1fr}
+  .timeline-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
+  .home-stats{grid-template-columns:1fr 1fr}
+  .home-stat:nth-child(2){border-right:none}
+  .event-row{grid-template-columns:90px 1fr;gap:1.5rem}
+  .event-genre-tag,.event-btn{display:none}
+  .mag-archive-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav-burger{display:flex}
+  .svc-grid,.pillars-grid,.artists-grid,.articles-row{grid-template-columns:1fr}
+  .articles-main-grid{grid-template-columns:1fr}
+  .home-stats{grid-template-columns:1fr 1fr}
+  .form-row{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .home-btns{flex-direction:column;align-items:center}
+  .events-cta-band{flex-direction:column;text-align:center}
+  .mag-cover-big{height:300px}
+  .mag-featured{padding:3rem 0}
+}
+</style>
 </head>
 <body>
 
 <!-- CURSOR -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
-<!-- PLAYER BAR -->
-<div class="player-bar" id="playerBar">
-  <div class="player-art">🎷</div>
-  <div class="player-info">
-    <div class="player-title">Afro-Sahel Blues</div>
-    <div class="player-artist">GraceTone JMP — Session Pilote</div>
-  </div>
-  <div class="player-controls">
-    <button class="player-btn">⏮</button>
-    <button class="player-play" id="playBtn">▶</button>
-    <button class="player-btn">⏭</button>
-  </div>
-  <div class="player-progress">
-    <div class="player-fill" id="playerFill"></div>
-  </div>
-  <div class="player-time">1:24 / 4:07</div>
-  <button class="player-close" id="playerClose">✕</button>
-</div>
+<div id="cur"></div>
+<div id="cur-ring"></div>
+<!-- SCROLL PROGRESS -->
+<div id="progress-bar"></div>
 
 <!-- NAV -->
 <nav id="navbar">
-  <a href="#" class="nav-logo">GraceTone <span style="font-family:'Bebas Neue'; font-size:0.9em; letter-spacing:0.2em;">JMP</span><span>Jazz Music Production</span></a>
-  <ul class="nav-links">
-    <li><a href="#about">Label</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#modele">Modèle</a></li>
-    <li><a href="#articles">Articles</a></li>
-    <li><a href="#magazine">Magazine</a></li>
-    <li><a href="#events">Évènements</a></li>
-    <li><a href="#newsletter" class="nav-cta">Rejoindre</a></li>
+  <a class="nav-logo" href="#" onclick="navigate('home');return false">
+    <strong>GraceTone <span style="color:var(--white)">JMP</span></strong>
+    <span>Jazz Music Production</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#" onclick="navigate('home');return false" data-page="home">Accueil</a></li>
+    <li><a href="#" onclick="navigate('about');return false" data-page="about">Label</a></li>
+    <li><a href="#" onclick="navigate('services');return false" data-page="services">Services</a></li>
+    <li><a href="#" onclick="navigate('artists');return false" data-page="artists">Artistes</a></li>
+    <li><a href="#" onclick="navigate('articles');return false" data-page="articles">Articles</a></li>
+    <li><a href="#" onclick="navigate('magazine');return false" data-page="magazine">Magazine</a></li>
+    <li><a href="#" onclick="navigate('events');return false" data-page="events">Évènements</a></li>
+    <li><a href="#" onclick="navigate('contact');return false" data-page="contact" class="nav-cta">Contact</a></li>
   </ul>
+  <button class="nav-burger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="vinyl-anim"></div>
-  <div class="vinyl-anim"></div>
-  <div class="vinyl-anim"></div>
-  <div class="music-lines" id="musicLines"></div>
-
-  <div class="hero-content">
-    <div class="hero-tag">Tchad · Jazz Afro-Sahélien · Label Évangélique</div>
-    <h1 class="hero-title">GRACE<span class="accent">TONE</span></h1>
-    <p class="hero-subtitle">Jazz Music Production — L'âme du Sahel en musique</p>
-    <div class="hero-tagline">Produire · Former · Distribuer · Rayonner</div>
-    <div class="hero-btns">
-      <a href="#about" class="btn-primary">Découvrir le label</a>
-      <a href="#events" class="btn-ghost">Voir les événements</a>
-    </div>
-  </div>
-
-  <div class="scroll-hint">
-    <span>Découvrir</span>
-    <div class="scroll-line"></div>
-  </div>
-</section>
-
-<!-- MARQUEE -->
-<div class="marquee-section">
-  <div class="marquee-track" id="marqueeTrack">
-    <span>Jazz Afro-Sahélien</span><span class="dot">✦</span>
-    <span>Production Musicale</span><span class="dot">✦</span>
-    <span>Label Évangélique</span><span class="dot">✦</span>
-    <span>Tchad</span><span class="dot">✦</span>
-    <span>Enregistrement</span><span class="dot">✦</span>
-    <span>Distribution Mondiale</span><span class="dot">✦</span>
-    <span>Management Artiste</span><span class="dot">✦</span>
-    <span>Streaming Global</span><span class="dot">✦</span>
-    <span>Festivals</span><span class="dot">✦</span>
-    <span>Formation Musicale</span><span class="dot">✦</span>
-    <span>Jazz Afro-Sahélien</span><span class="dot">✦</span>
-    <span>Production Musicale</span><span class="dot">✦</span>
-    <span>Label Évangélique</span><span class="dot">✦</span>
-    <span>Tchad</span><span class="dot">✦</span>
-    <span>Enregistrement</span><span class="dot">✦</span>
-    <span>Distribution Mondiale</span><span class="dot">✦</span>
-    <span>Management Artiste</span><span class="dot">✦</span>
-    <span>Streaming Global</span><span class="dot">✦</span>
-    <span>Festivals</span><span class="dot">✦</span>
-    <span>Formation Musicale</span><span class="dot">✦</span>
-  </div>
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" id="mobClose">✕</button>
+  <a href="#" onclick="navigate('home');closeMob();return false">Accueil</a>
+  <a href="#" onclick="navigate('about');closeMob();return false">Label</a>
+  <a href="#" onclick="navigate('services');closeMob();return false">Services</a>
+  <a href="#" onclick="navigate('artists');closeMob();return false">Artistes</a>
+  <a href="#" onclick="navigate('articles');closeMob();return false">Articles</a>
+  <a href="#" onclick="navigate('magazine');closeMob();return false">Magazine</a>
+  <a href="#" onclick="navigate('events');closeMob();return false">Évènements</a>
+  <a href="#" onclick="navigate('contact');closeMob();return false">Contact</a>
 </div>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <div class="section-label">Présentation du Projet</div>
-        <h2 class="section-title">Le Label qui <span class="italic">structure</span> une filière</h2>
-        <div class="divider"></div>
-        <p><strong>GraceTone Jazz Music Production (JMP)</strong> est un label de musique indépendant spécialisé dans le jazz, basé au <strong>Tchad</strong>. À caractère évangélique, nous visons à devenir une <strong>référence mondiale dans le jazz afro-sahélien</strong>.</p>
-        <p>Notre mission est de <strong>structurer la filière musicale locale</strong> en produisant, formant et distribuant des artistes, grâce à des infrastructures de pointe, des partenariats stratégiques internationaux et une vision résolument tournée vers <strong>l'export global</strong>.</p>
-        <p>GraceTone JMP n'est pas simplement un label — c'est un <strong>écosystème complet</strong> : studio semi-pro de qualité internationale, académie de formation, réseau de distribution mondial et plateforme événementielle pour le jazz africain.</p>
-        <a href="#services" class="btn-primary" style="margin-top: 2rem;">Nos Services</a>
+<!-- AUDIO PLAYER -->
+<div class="player" id="player">
+  <div class="player-art">🎷</div>
+  <div class="player-meta">
+    <div class="player-track">Afro-Sahel Blues</div>
+    <div class="player-sub">GraceTone JMP — Session Pilote</div>
+  </div>
+  <div class="player-ctrl">
+    <button class="p-btn">⏮</button>
+    <button class="p-play" id="pPlay">▶</button>
+    <button class="p-btn">⏭</button>
+  </div>
+  <div class="player-prog" id="pProg">
+    <div class="player-fill" id="pFill" style="width:33%"></div>
+  </div>
+  <div class="player-time">1:22 / 4:07</div>
+  <button class="p-close" id="pClose">✕</button>
+</div>
+
+<!-- APP CONTAINER -->
+<div id="app">
+
+<!-- ░░░ PAGE HOME ░░░ -->
+<div class="page active" id="page-home">
+
+  <section class="home-hero">
+    <div class="rings">
+      <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+    </div>
+    <div class="vinyl-spin"></div>
+    <div class="home-hero-content">
+      <div class="home-eyebrow">Tchad · Jazz Afro-Sahélien · Label Évangélique</div>
+      <h1 class="home-title">GRACE<span class="g">TONE</span></h1>
+      <p class="home-sub">Jazz Music Production — L'âme du Sahel en musique</p>
+      <p class="home-tagline">Produire · Former · Distribuer · Rayonner</p>
+      <div class="home-btns">
+        <button class="btn-gold" onclick="navigate('about')">Découvrir le label</button>
+        <button class="btn-outline" onclick="navigate('events')">Voir les événements</button>
       </div>
-      <div class="about-visual reveal">
-        <div class="floating-note">♪</div>
+    </div>
+    <div class="home-scroll">
+      <span>Découvrir</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <div class="marquee-bar">
+    <div class="marquee-inner">
+      <span>Jazz Afro-Sahélien</span><span class="dot">✦</span><span>Production Musicale</span><span class="dot">✦</span><span>Label Évangélique</span><span class="dot">✦</span><span>Tchad</span><span class="dot">✦</span><span>Enregistrement</span><span class="dot">✦</span><span>Distribution Mondiale</span><span class="dot">✦</span><span>Management Artiste</span><span class="dot">✦</span><span>Streaming Global</span><span class="dot">✦</span><span>Festivals</span><span class="dot">✦</span><span>Formation Musicale</span><span class="dot">✦</span>
+      <span>Jazz Afro-Sahélien</span><span class="dot">✦</span><span>Production Musicale</span><span class="dot">✦</span><span>Label Évangélique</span><span class="dot">✦</span><span>Tchad</span><span class="dot">✦</span><span>Enregistrement</span><span class="dot">✦</span><span>Distribution Mondiale</span><span class="dot">✦</span><span>Management Artiste</span><span class="dot">✦</span><span>Streaming Global</span><span class="dot">✦</span><span>Festivals</span><span class="dot">✦</span><span>Formation Musicale</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <div class="home-stats">
+    <div class="home-stat reveal"><span class="home-stat-num" data-n="7">0</span><span class="home-stat-label">Sources de revenus</span></div>
+    <div class="home-stat reveal"><span class="home-stat-num" data-n="36">0</span><span class="home-stat-label">Mois de trajectoire</span></div>
+    <div class="home-stat reveal"><span class="home-stat-num" data-n="3">0</span><span class="home-stat-label">Phases de déploiement</span></div>
+    <div class="home-stat reveal"><span class="home-stat-num">∞</span><span class="home-stat-label">Vision mondiale</span></div>
+  </div>
+
+  <section class="home-featured">
+    <div class="container">
+      <div class="home-featured-grid">
+        <div class="home-featured-text reveal">
+          <span class="section-label">Présentation</span>
+          <h2 class="section-title">Le label qui <span class="it">structure</span> une filière</h2>
+          <div class="divider"></div>
+          <p><strong>GraceTone Jazz Music Production (JMP)</strong> est un label de musique indépendant spécialisé dans le jazz, basé au <strong>Tchad</strong>. À caractère évangélique, nous visons à devenir une référence mondiale dans le <strong>jazz afro-sahélien</strong>.</p>
+          <p>Notre mission : structurer la filière musicale locale en produisant, formant et distribuant des artistes, grâce à des infrastructures de pointe et des partenariats stratégiques internationaux.</p>
+          <button class="btn-gold" onclick="navigate('about')" style="margin-top:1.5rem">En savoir plus</button>
+        </div>
+        <div class="reveal">
+          <div class="home-cards">
+            <div class="home-card" onclick="navigate('services')">
+              <span class="home-card-icon">🎙️</span>
+              <div><div class="home-card-title">Studio & Production</div><div class="home-card-sub">Enregistrement, mixage, mastering international</div></div>
+              <span class="home-card-arr">→</span>
+            </div>
+            <div class="home-card" onclick="navigate('artists')">
+              <span class="home-card-icon">🎷</span>
+              <div><div class="home-card-title">Nos Artistes</div><div class="home-card-sub">Talents signés et artistes en résidence</div></div>
+              <span class="home-card-arr">→</span>
+            </div>
+            <div class="home-card" onclick="navigate('events')">
+              <span class="home-card-icon">🎺</span>
+              <div><div class="home-card-title">Festivals & Évènements</div><div class="home-card-sub">Showcases et festivals à venir</div></div>
+              <span class="home-card-arr">→</span>
+            </div>
+            <div class="home-card" onclick="navigate('magazine')">
+              <span class="home-card-icon">📖</span>
+              <div><div class="home-card-title">Magazine GraceTone</div><div class="home-card-sub">Publication trimestrielle jazz & culture</div></div>
+              <span class="home-card-arr">→</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-pillars">
+    <div class="container">
+      <div style="text-align:center" class="reveal">
+        <span class="section-label" style="display:block;text-align:center">Notre ADN</span>
+        <h2 class="section-title" style="text-align:center">Trois <span class="it">piliers</span> fondateurs</h2>
+        <div class="divider" style="margin:1.4rem auto"></div>
+      </div>
+      <div class="pillars-grid">
+        <div class="pillar reveal"><span class="pillar-num">01</span><span class="pillar-icon">🙏</span><div class="pillar-title">Caractère Évangélique</div><p class="pillar-desc">Chaque production et showcase intègre un message évangélique authentique. La musique est notre ministère, le jazz afro-sahélien notre vecteur de transmission du message de grâce.</p></div>
+        <div class="pillar reveal"><span class="pillar-num">02</span><span class="pillar-icon">🌍</span><div class="pillar-title">Jazz Afro-Sahélien</div><p class="pillar-desc">Nés au cœur du Sahel tchadien, nous façonnons un son unique qui fusionne les rythmes ancestraux africains avec les harmonies du jazz international pour créer un genre mondial.</p></div>
+        <div class="pillar reveal"><span class="pillar-num">03</span><span class="pillar-icon">🚀</span><div class="pillar-title">Export Global</div><p class="pillar-desc">Streaming mondial, tournées internationales, partenariats stratégiques, licences et synchronisations — GraceTone JMP positionne le Tchad sur la carte du jazz mondial.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter strip on home -->
+  <div class="newsletter-strip">
+    <div class="container">
+      <div class="newsletter-inner reveal">
+        <span class="section-label" style="text-align:center;display:block">Restez connecté</span>
+        <h2 class="section-title" style="text-align:center;margin-bottom:.8rem">Rejoignez la <span class="it">famille</span></h2>
+        <p>Actualités du label, sorties d'albums, dates de concerts et articles exclusifs — recevez tout en avant-première.</p>
+        <div class="nl-form">
+          <input class="nl-input" type="email" placeholder="votre@email.com"/>
+          <button class="nl-btn">S'abonner</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="footer-brand-name">GraceTone JMP</span>
+          <span class="footer-brand-sub">Jazz Music Production</span>
+          <p>Label de production musicale indépendant dédié au jazz afro-sahélien. Basé à N'Djamena, Tchad. Rayonnant sur le monde.</p>
+        </div>
+        <div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div>
+        <div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles Jazz</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:info@gracetone.com">info@gracetone.com</a></li><li><a href="#">N'Djamena, Tchad</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2025 GraceTone JMP. Tous droits réservés.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div>
+    </div>
+  </footer>
+</div><!-- /page-home -->
+
+<!-- ░░░ PAGE ABOUT ░░░ -->
+<div class="page" id="page-about">
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="container pt">
+      <span class="section-label reveal">Notre histoire</span>
+      <h1 class="section-title reveal">À propos du <span class="it">Label</span></h1>
+      <div class="divider reveal"></div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="about-intro">
+      <div class="about-body">
+        <div class="about-quote reveal">"La musique est notre ministère,<br>le jazz est notre langage."</div>
+        <p class="reveal"><strong>GraceTone Jazz Music Production (JMP)</strong> est un label de musique indépendant spécialisé dans le jazz, basé au <strong>Tchad</strong>. À caractère évangélique, nous visons à devenir une <strong>référence mondiale dans le jazz afro-sahélien</strong>.</p>
+        <p class="reveal">Notre mission est de <strong>structurer la filière musicale locale</strong> en produisant, formant et distribuant des artistes, grâce à des infrastructures de pointe, des partenariats stratégiques internationaux et une vision résolument tournée vers <strong>l'export global</strong>.</p>
+        <p class="reveal">GraceTone JMP n'est pas simplement un label — c'est un <strong>écosystème complet</strong> : studio semi-pro de qualité internationale, académie de formation, réseau de distribution mondial et plateforme événementielle pour le jazz africain.</p>
+        <p class="reveal">Né dans le Sahel tchadien, notre son puise dans les rythmes ancestraux de la région pour les fusionner avec les harmonies du jazz international. Un genre qui appartient à l'Afrique et qui s'exporte dans le monde entier — porteur d'un <strong>message de foi et de grâce</strong>.</p>
+      </div>
+      <div class="about-side reveal">
         <div class="about-card">
-          <div style="text-align:center; margin-bottom: 2rem;">
-            <div class="section-label" style="text-align:center;">GraceTone JMP en chiffres</div>
+          <span class="section-label" style="display:block;text-align:center;margin-bottom:1.5rem">GraceTone JMP en chiffres</span>
+          <div class="about-stat-grid">
+            <div class="about-stat"><span class="about-stat-n">7</span><span class="about-stat-l">Sources revenus</span></div>
+            <div class="about-stat"><span class="about-stat-n">36</span><span class="about-stat-l">Mois plan</span></div>
+            <div class="about-stat"><span class="about-stat-n">3</span><span class="about-stat-l">Phases déploiement</span></div>
+            <div class="about-stat"><span class="about-stat-n">∞</span><span class="about-stat-l">Vision mondiale</span></div>
           </div>
-          <div class="stat-grid">
-            <div class="stat">
-              <span class="stat-num" data-target="7">7</span>
-              <span class="stat-label">Sources de revenus</span>
-            </div>
-            <div class="stat">
-              <span class="stat-num" data-target="36">36</span>
-              <span class="stat-label">Mois de trajectoire</span>
-            </div>
-            <div class="stat">
-              <span class="stat-num" data-target="3">3</span>
-              <span class="stat-label">Phases de déploiement</span>
-            </div>
-            <div class="stat">
-              <span class="stat-num">∞</span>
-              <span class="stat-label">Vision mondiale</span>
-            </div>
-          </div>
-          <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(201,168,76,0.12);">
-            <p style="font-family: 'Cormorant Garamond', serif; font-style:italic; color: var(--cream2); font-size: 1.1rem; line-height: 1.7; text-align: center;">
-              "La musique est notre ministère,<br>le jazz est notre langage."
-            </p>
-            <p style="font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color: var(--gold); text-align: center; margin-top: 1rem;">— GraceTone JMP, N'Djamena, Tchad</p>
-          </div>
+          <div class="about-vision"><p>"Jazz Music Production est un label de musique spécialisé jazz au Tchad à caractère évangélique, visant à devenir une référence mondiale dans le jazz afro-sahélien. Il structure la filière locale en produisant, formant et distribuant des artistes."</p></div>
         </div>
+      </div>
+    </div>
+
+    <div class="about-timeline">
+      <div style="text-align:center" class="reveal">
+        <span class="section-label" style="display:block;text-align:center">Feuille de route</span>
+        <h2 class="section-title" style="text-align:center">Trajectoire <span class="it">Indicative</span></h2>
+        <div class="divider" style="margin:1.4rem auto"></div>
+        <p style="text-align:center;color:var(--muted);max-width:560px;margin:0 auto 3.5rem;font-size:.9rem;line-height:1.8">Plan de déploiement sur 12 à 36 mois, structuré en trois phases de croissance progressive.</p>
+      </div>
+      <div class="timeline-grid">
+        <div class="tl-phase reveal"><div class="tl-dot"></div><span class="tl-tag">Court terme · 0 – 12 mois</span><div class="tl-title">Fondation & Lancement</div><p class="tl-desc">Création de l'entité légale GraceTone JMP. Installation du studio semi-pro de qualité internationale. Signature des artistes pilotes. Production des premiers EP et singles. Organisation des showcases introductifs avec messages évangéliques.</p></div>
+        <div class="tl-phase center-phase reveal"><div class="tl-dot"></div><span class="tl-tag">Moyen terme · 12 – 24 mois</span><div class="tl-title">Croissance & Déploiement</div><p class="tl-desc">Mise en ligne sur toutes les plateformes de streaming international. Première tournée régionale Afrique centrale. Lancement de l'académie de formation musicale. Développement des partenariats stratégiques en Afrique et en Europe.</p></div>
+        <div class="tl-phase reveal"><div class="tl-dot"></div><span class="tl-tag">Long terme · 24 – 36 mois</span><div class="tl-title">Rayonnement International</div><p class="tl-desc">Positionnement comme référence mondiale du jazz afro-sahélien. Tournées internationales, licences et synchronisations, partenariats médias. Organisation du premier grand festival GraceTone JMP à N'Djamena.</p></div>
       </div>
     </div>
   </div>
-</section>
-
-<!-- VISION -->
-<section id="vision">
-  <div class="container">
-    <div style="text-align:center;" class="reveal">
-      <div class="section-label" style="text-align:center;">Notre ADN</div>
-      <h2 class="section-title" style="text-align:center;">Trois <span class="italic">piliers</span> fondateurs</h2>
-      <div class="divider" style="margin: 1.5rem auto;"></div>
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><span class="footer-brand-name">GraceTone JMP</span><span class="footer-brand-sub">Jazz Music Production</span><p>Label de production musicale indépendant dédié au jazz afro-sahélien. Basé à N'Djamena, Tchad.</p></div>
+        <div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div>
+        <div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles Jazz</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:info@gracetone.com">info@gracetone.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2025 GraceTone JMP. Tous droits réservés.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div>
     </div>
-    <div class="vision-grid">
-      <div class="vision-card reveal">
-        <span class="vision-icon">🙏</span>
-        <h3 class="vision-title">Caractère Évangélique</h3>
-        <p class="vision-desc">GraceTone JMP porte une vision spirituelle forte. Chaque production, chaque showcase intègre un message évangélique authentique. La musique est notre ministère, le jazz afro-sahélien notre vecteur de transmission.</p>
+  </footer>
+</div><!-- /about -->
+
+<!-- ░░░ PAGE SERVICES ░░░ -->
+<div class="page" id="page-services">
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="container pt">
+      <span class="section-label reveal">Ce que nous offrons</span>
+      <h1 class="section-title reveal">Nos <span class="it">Services</span></h1>
+      <div class="divider reveal"></div>
+      <div class="services-intro reveal"><p>GraceTone JMP propose un écosystème complet de services musicaux — du studio à la scène internationale, en passant par la formation et la distribution mondiale.</p></div>
+    </div>
+  </div>
+  <div class="container" style="padding-bottom:6rem">
+    <div class="svc-grid">
+      <div class="svc-card reveal"><span class="svc-n">01</span><span class="svc-icon">🎙️</span><div class="svc-title">Studio Semi-Pro International</div><p class="svc-desc">Infrastructure studio de qualité internationale installée au Tchad. Enregistrement, production et post-production aux standards mondiaux pour les artistes locaux et régionaux.</p><span class="svc-tag">Recording</span></div>
+      <div class="svc-card reveal"><span class="svc-n">02</span><span class="svc-icon">🎚️</span><div class="svc-title">Mixage & Mastering</div><p class="svc-desc">Traitement audio professionnel pour un rendu premium sur toutes les plateformes de streaming global. Chaque titre masterisé aux standards internationaux — Spotify, Apple Music, Boomplay.</p><span class="svc-tag">Post-production</span></div>
+      <div class="svc-card reveal"><span class="svc-n">03</span><span class="svc-icon">🎵</span><div class="svc-title">Production EP & Singles</div><p class="svc-desc">Accompagnement créatif complet de la composition à l'arrangement. Production des premiers EP et singles pilotes pour les artistes signés chez GraceTone JMP.</p><span class="svc-tag">Production</span></div>
+      <div class="svc-card reveal"><span class="svc-n">04</span><span class="svc-icon">🌐</span><div class="svc-title">Distribution Mondiale</div><p class="svc-desc">Mise en ligne sur toutes les plateformes de streaming internationales. Distribution physique en Afrique centrale, en Europe et sur les marchés diaspora. Droits voisins et royalties optimisés.</p><span class="svc-tag">Distribution</span></div>
+      <div class="svc-card reveal"><span class="svc-n">05</span><span class="svc-icon">🎤</span><div class="svc-title">Management & Booking</div><p class="svc-desc">Développement de carrière sur mesure. Booking national et international, relations presse, stratégie digitale, commissions sur cachets et tournées internationales.</p><span class="svc-tag">Management</span></div>
+      <div class="svc-card reveal"><span class="svc-n">06</span><span class="svc-icon">🎺</span><div class="svc-title">Formations & Ateliers</div><p class="svc-desc">Ateliers spécialisés et masterclasses dispensés par des musiciens jazz professionnels. Jazz, improvisation, théorie musicale, production pour tous niveaux.</p><span class="svc-tag">Académie</span></div>
+      <div class="svc-card reveal"><span class="svc-n">07</span><span class="svc-icon">🎬</span><div class="svc-title">Licences & Synchronisations</div><p class="svc-desc">Placement musical dans les films, publicités et médias internationaux. Exploitation des droits de synchronisation pour générer des revenus passifs et renforcer la visibilité mondiale.</p><span class="svc-tag">Licensing</span></div>
+      <div class="svc-card reveal"><span class="svc-n">08</span><span class="svc-icon">🎪</span><div class="svc-title">Événementiel & Festivals</div><p class="svc-desc">Organisation de showcases, concerts et festivals jazz avec messages évangéliques. Billetterie, sponsoring, merchandising. Création d'événements signature.</p><span class="svc-tag">Événementiel</span></div>
+      <div class="svc-card reveal"><span class="svc-n">09</span><span class="svc-icon">🏢</span><div class="svc-title">Prestations Studio Tiers</div><p class="svc-desc">Location studio et services de production pour des clients tiers locaux et internationaux. Source de revenus complémentaire et vitrine des capacités techniques de GraceTone JMP.</p><span class="svc-tag">B2B Studio</span></div>
+    </div>
+
+    <div class="modele-section">
+      <div style="text-align:center" class="reveal">
+        <span class="section-label" style="display:block;text-align:center">Pérennité financière</span>
+        <h2 class="section-title" style="text-align:center">Modèle <span class="it">Économique</span></h2>
+        <div class="divider" style="margin:1.4rem auto"></div>
       </div>
-      <div class="vision-card reveal">
-        <span class="vision-icon">🌍</span>
-        <h3 class="vision-title">Jazz Afro-Sahélien</h3>
-        <p class="vision-desc">Nés au cœur du Sahel tchadien, nous façonnons un son unique qui fusionne les rythmes ancestraux africains avec les harmonies du jazz international. Un genre qui appartient à l'Afrique et s'exporte dans le monde entier.</p>
-      </div>
-      <div class="vision-card reveal">
-        <span class="vision-icon">🚀</span>
-        <h3 class="vision-title">Export Global</h3>
-        <p class="vision-desc">Notre ambition est résolument internationale. Streaming mondial, tournées internationales, partenariats stratégiques, licences et synchronisations — GraceTone JMP positionne le Tchad sur la carte du jazz mondial.</p>
+      <div class="modele-list">
+        <div class="modele-row reveal"><div class="modele-row-n">01</div><div><div class="modele-row-title">Production & Royalties</div><div class="modele-row-desc">Streaming global, ventes physiques, droits voisins — revenus récurrents sur catalogue croissant.</div></div><span class="modele-row-tag">Streaming</span></div>
+        <div class="modele-row reveal"><div class="modele-row-n">02</div><div><div class="modele-row-title">Management & Booking</div><div class="modele-row-desc">Commissions sur cachets et tournées nationales et internationales des artistes signés.</div></div><span class="modele-row-tag">Booking</span></div>
+        <div class="modele-row reveal"><div class="modele-row-n">03</div><div><div class="modele-row-title">Événementiel</div><div class="modele-row-desc">Billetterie, sponsors, festivals — création d'événements signature à forte valeur ajoutée.</div></div><span class="modele-row-tag">Events</span></div>
+        <div class="modele-row reveal"><div class="modele-row-n">04</div><div><div class="modele-row-title">Merchandising & Produits Dérivés</div><div class="modele-row-desc">Développement de la marque GraceTone JMP à travers des produits musicaux, vestimentaires et culturels.</div></div><span class="modele-row-tag">Brand</span></div>
+        <div class="modele-row reveal"><div class="modele-row-n">05</div><div><div class="modele-row-title">Licences & Synchronisations</div><div class="modele-row-desc">Films, publicités, médias internationaux — exploitation des droits de synchronisation pour revenus passifs.</div></div><span class="modele-row-tag">Licensing</span></div>
+        <div class="modele-row reveal"><div class="modele-row-n">06</div><div><div class="modele-row-title">Formations & Ateliers Spécialisés</div><div class="modele-row-desc">Académie jazz pour former la prochaine génération de musiciens tchadiens et africains.</div></div><span class="modele-row-tag">Academy</span></div>
+        <div class="modele-row reveal"><div class="modele-row-n">07</div><div><div class="modele-row-title">Prestations Studio pour Tiers Internationaux</div><div class="modele-row-desc">Valorisation des équipements et expertise technique du label entre les sessions propres.</div></div><span class="modele-row-tag">B2B</span></div>
       </div>
     </div>
   </div>
-</section>
+  <footer><div class="container"><div class="footer-grid"><div class="footer-brand"><span class="footer-brand-name">GraceTone JMP</span><span class="footer-brand-sub">Jazz Music Production</span><p>Label de production musicale indépendant. N'Djamena, Tchad.</p></div><div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div><div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:info@gracetone.com">info@gracetone.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div></div><div class="footer-bottom"><span>© 2025 GraceTone JMP.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div></div></footer>
+</div><!-- /services -->
 
-<!-- SERVICES -->
-<section id="services">
-  <div class="container">
-    <div class="services-header reveal">
-      <div class="section-label" style="text-align:center;">Ce que nous offrons</div>
-      <h2 class="section-title" style="text-align:center;">Nos <span class="italic">Services</span></h2>
-      <div class="divider" style="margin: 1.5rem auto;"></div>
-    </div>
-    <div class="services-grid">
-      <div class="service-card reveal">
-        <span class="service-num">01</span>
-        <span class="service-icon">🎙️</span>
-        <h3 class="service-title">Studio Semi-Pro International</h3>
-        <p class="service-desc">Infrastructure studio de qualité internationale installée au Tchad. Enregistrement, production et post-production aux standards mondiaux pour les artistes locaux et régionaux.</p>
-        <span class="service-tag">Recording</span>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-num">02</span>
-        <span class="service-icon">🎚️</span>
-        <h3 class="service-title">Mixage & Mastering</h3>
-        <p class="service-desc">Traitement audio professionnel pour un rendu premium sur toutes les plateformes de streaming global. Chaque titre masterisé aux standards internationaux — Spotify, Apple Music, Boomplay.</p>
-        <span class="service-tag">Post-production</span>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-num">03</span>
-        <span class="service-icon">🎵</span>
-        <h3 class="service-title">Production EP & Singles</h3>
-        <p class="service-desc">Accompagnement créatif complet de la composition à l'arrangement. Production des premiers EP et singles pilotes pour les artistes signés chez GraceTone JMP.</p>
-        <span class="service-tag">Production</span>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-num">04</span>
-        <span class="service-icon">🌐</span>
-        <h3 class="service-title">Distribution Mondiale</h3>
-        <p class="service-desc">Mise en ligne sur toutes les plateformes de streaming internationales. Distribution physique en Afrique centrale, en Europe et sur les marchés diaspora. Droits voisins et royalties optimisés.</p>
-        <span class="service-tag">Distribution</span>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-num">05</span>
-        <span class="service-icon">🎤</span>
-        <h3 class="service-title">Management & Booking</h3>
-        <p class="service-desc">Développement de carrière sur mesure. Booking national et international, relations presse, stratégie digitale, commissions sur cachets et tournées internationales pour les artistes GraceTone.</p>
-        <span class="service-tag">Management</span>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-num">06</span>
-        <span class="service-icon">🎺</span>
-        <h3 class="service-title">Formations & Ateliers</h3>
-        <p class="service-desc">Ateliers spécialisés et masterclasses dispensés par des musiciens jazz professionnels. Jazz, improvisation, théorie musicale, production pour tous niveaux. Formation de la nouvelle génération africaine.</p>
-        <span class="service-tag">Académie</span>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-num">07</span>
-        <span class="service-icon">🎬</span>
-        <h3 class="service-title">Licences & Synchronisations</h3>
-        <p class="service-desc">Placement musical dans les films, publicités et médias internationaux. Exploitation des droits de synchronisation pour générer des revenus passifs et renforcer la visibilité mondiale des artistes.</p>
-        <span class="service-tag">Licensing</span>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-num">08</span>
-        <span class="service-icon">🎪</span>
-        <h3 class="service-title">Événementiel & Festivals</h3>
-        <p class="service-desc">Organisation de showcases, concerts et festivals jazz avec messages évangéliques. Billetterie, sponsoring, merchandising. Création d'événements signature qui positionnent le Tchad sur la carte du jazz.</p>
-        <span class="service-tag">Événementiel</span>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-num">09</span>
-        <span class="service-icon">🏢</span>
-        <h3 class="service-title">Prestations Studio Tiers</h3>
-        <p class="service-desc">Location studio et services de production pour des clients tiers locaux et internationaux. Source de revenus complémentaire et vitrine des capacités techniques de GraceTone JMP.</p>
-        <span class="service-tag">B2B Studio</span>
-      </div>
+<!-- ░░░ PAGE ARTISTS ░░░ -->
+<div class="page" id="page-artists">
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="container pt">
+      <span class="section-label reveal">Notre famille musicale</span>
+      <h1 class="section-title reveal">Nos <span class="it">Artistes</span></h1>
+      <div class="divider reveal"></div>
     </div>
   </div>
-</section>
-
-<!-- MODELE ECONOMIQUE -->
-<section id="modele">
-  <div class="container">
-    <div class="modele-header reveal">
-      <div class="section-label" style="text-align:center;">Pérennité financière</div>
-      <h2 class="section-title" style="text-align:center;">Modèle <span class="italic">Économique</span></h2>
-      <div class="divider" style="margin: 1.5rem auto;"></div>
-      <p style="text-align:center; color: var(--muted); max-width: 600px; margin: 0 auto; font-size: 0.9rem; line-height: 1.8;">GraceTone JMP repose sur 7 sources de revenus complémentaires, assurant une stabilité financière et une croissance soutenue à long terme.</p>
+  <div class="container" style="padding-bottom:6rem">
+    <div class="artists-grid" style="margin-top:2rem">
+      <div class="artist-card reveal">
+        <div class="artist-avatar"><div class="artist-avatar-placeholder">♪</div><div class="artist-avatar-overlay"></div></div>
+        <div class="artist-info">
+          <div class="artist-name">Artiste Pilote A</div>
+          <div class="artist-role">Saxophoniste · Compositeur</div>
+          <div class="artist-bio">Premier artiste signé chez GraceTone JMP. Fusion jazz afro-sahélien et harmonies contemporaines. EP en cours de production.</div>
+          <div class="artist-tags"><span class="artist-tag">Jazz</span><span class="artist-tag">Composition</span><span class="artist-tag">Sahel</span></div>
+        </div>
+      </div>
+      <div class="artist-card reveal">
+        <div class="artist-avatar"><div class="artist-avatar-placeholder">🎹</div><div class="artist-avatar-overlay"></div></div>
+        <div class="artist-info">
+          <div class="artist-name">Artiste Pilote B</div>
+          <div class="artist-role">Pianiste · Arrangeur</div>
+          <div class="artist-bio">Musicien aux influences afro-jazz et gospel. Ses arrangements mêlent tradition tchadienne et modernité harmonique pour un son profondément évangélique.</div>
+          <div class="artist-tags"><span class="artist-tag">Piano</span><span class="artist-tag">Gospel Jazz</span><span class="artist-tag">Arrangement</span></div>
+        </div>
+      </div>
+      <div class="artist-card reveal">
+        <div class="artist-avatar"><div class="artist-avatar-placeholder">🎺</div><div class="artist-avatar-overlay"></div></div>
+        <div class="artist-info">
+          <div class="artist-name">Artiste Pilote C</div>
+          <div class="artist-role">Trompettiste · Chanteur</div>
+          <div class="artist-bio">Voix et cuivres puissants nourris des rythmes du Sahel. Son univers fusionne jazz afro-américain et tradition musicale du Tchad central.</div>
+          <div class="artist-tags"><span class="artist-tag">Trompette</span><span class="artist-tag">Vocals</span><span class="artist-tag">Afro Jazz</span></div>
+        </div>
+      </div>
+      <div class="artist-card reveal">
+        <div class="artist-avatar"><div class="artist-avatar-placeholder">🥁</div><div class="artist-avatar-overlay"></div></div>
+        <div class="artist-info">
+          <div class="artist-name">Artiste Pilote D</div>
+          <div class="artist-role">Percussionniste · Producteur</div>
+          <div class="artist-bio">Rhythmes ancestraux du Tchad réinterprétés dans un cadre jazz contemporain. Producteur de la session pilote GraceTone JMP Vol. 1.</div>
+          <div class="artist-tags"><span class="artist-tag">Percussions</span><span class="artist-tag">Production</span><span class="artist-tag">World Jazz</span></div>
+        </div>
+      </div>
+      <div class="artist-card reveal">
+        <div class="artist-avatar"><div class="artist-avatar-placeholder">🎸</div><div class="artist-avatar-overlay"></div></div>
+        <div class="artist-info">
+          <div class="artist-name">Artiste Pilote E</div>
+          <div class="artist-role">Guitariste · Auteur-compositeur</div>
+          <div class="artist-bio">Blues du désert rencontre jazz moderne. Ses compositions parlent de foi, de terre et d'horizons. Single pilote prévu pour la phase 1 de GraceTone JMP.</div>
+          <div class="artist-tags"><span class="artist-tag">Guitare</span><span class="artist-tag">Blues</span><span class="artist-tag">Songwriting</span></div>
+        </div>
+      </div>
+      <div class="artist-card reveal" style="border-style:dashed;border-color:rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;min-height:380px;cursor:pointer" onclick="navigate('contact')">
+        <div style="text-align:center;padding:2rem">
+          <div style="font-size:3rem;margin-bottom:1rem;opacity:.4">+</div>
+          <div class="artist-name" style="font-size:1rem">Votre place ici</div>
+          <div class="artist-bio" style="margin-top:.5rem">GraceTone JMP recrute des artistes pilotes. Contactez-nous.</div>
+          <span class="svc-tag" style="margin-top:1rem;display:inline-block">Candidater →</span>
+        </div>
+      </div>
     </div>
-    <div class="modele-grid">
-      <div class="modele-item reveal">
-        <span class="modele-num">01</span>
-        <div class="modele-text">
-          <div class="modele-title">Production & Royalties</div>
-          <div class="modele-desc">Streaming global, ventes physiques et droits voisins. Revenus récurrents et croissants au fil de la croissance du catalogue d'artistes signés.</div>
-        </div>
-      </div>
-      <div class="modele-item reveal">
-        <span class="modele-num">02</span>
-        <div class="modele-text">
-          <div class="modele-title">Management & Booking</div>
-          <div class="modele-desc">Commissions sur cachets et tournées internationales. Accompagnement des artistes sur scène au niveau national et à l'international.</div>
-        </div>
-      </div>
-      <div class="modele-item reveal">
-        <span class="modele-num">03</span>
-        <div class="modele-text">
-          <div class="modele-title">Événementiel</div>
-          <div class="modele-desc">Billetterie, sponsors et partenariats festivals. Organisation d'événements signature porteurs de la vision jazz afro-sahélienne et évangélique.</div>
-        </div>
-      </div>
-      <div class="modele-item reveal">
-        <span class="modele-num">04</span>
-        <div class="modele-text">
-          <div class="modele-title">Merchandising & Produits Dérivés</div>
-          <div class="modele-desc">Développement de la marque GraceTone JMP à travers des produits dérivés musicaux, vestimentaires et culturels distribués localement et en ligne.</div>
-        </div>
-      </div>
-      <div class="modele-item reveal">
-        <span class="modele-num">05</span>
-        <div class="modele-text">
-          <div class="modele-title">Licences & Synchronisations</div>
-          <div class="modele-desc">Placement dans films, publicités et médias internationaux. Exploitation des droits de synchronisation pour une visibilité mondiale et des revenus passifs durables.</div>
-        </div>
-      </div>
-      <div class="modele-item reveal">
-        <span class="modele-num">06</span>
-        <div class="modele-text">
-          <div class="modele-title">Formations & Ateliers Spécialisés</div>
-          <div class="modele-desc">Académie de formation musicale jazz. Masterclasses, ateliers et cursus spécialisés pour former la prochaine génération de musiciens tchadiens et africains.</div>
-        </div>
-      </div>
-      <div class="modele-item reveal">
-        <span class="modele-num">07</span>
-        <div class="modele-text">
-          <div class="modele-title">Prestations Studio pour Tiers</div>
-          <div class="modele-desc">Location studio et services de production pour clients tiers locaux et internationaux. Valorisation des équipements et expertise technique du label entre les sessions propres.</div>
-        </div>
-      </div>
-      <div class="modele-item reveal" style="border-color: rgba(201,168,76,0.25); background: rgba(201,168,76,0.04);">
-        <span class="modele-num" style="opacity:1;">✦</span>
-        <div class="modele-text">
-          <div class="modele-title" style="color: var(--gold);">Vision à Long Terme</div>
-          <div class="modele-desc">Partenariats stratégiques internationaux, entrée sur des marchés diaspora en Europe et en Amérique du Nord, et positionnement comme référence du jazz africain à l'export global.</div>
-        </div>
-      </div>
+
+    <div class="cfa-band reveal">
+      <h3>Vous êtes artiste ? Rejoignez GraceTone JMP</h3>
+      <p>GraceTone JMP est à la recherche de talents jazz et musiques africaines pour intégrer son roster pilote. Studio, management, distribution mondiale — nous vous accompagnons à chaque étape.</p>
+      <button class="btn-gold" onclick="navigate('contact')">Soumettre votre candidature</button>
     </div>
   </div>
-</section>
+  <footer><div class="container"><div class="footer-grid"><div class="footer-brand"><span class="footer-brand-name">GraceTone JMP</span><span class="footer-brand-sub">Jazz Music Production</span><p>Label de production musicale indépendant. N'Djamena, Tchad.</p></div><div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div><div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:info@gracetone.com">info@gracetone.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div></div><div class="footer-bottom"><span>© 2025 GraceTone JMP.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div></div></footer>
+</div><!-- /artists -->
 
-<!-- TRAJECTOIRE -->
-<section id="trajectoire">
-  <div class="container">
-    <div class="traj-header reveal">
-      <div class="section-label" style="text-align:center;">Feuille de route</div>
-      <h2 class="section-title" style="text-align:center;">Trajectoire <span class="italic">Indicative</span></h2>
-      <div class="divider" style="margin: 1.5rem auto;"></div>
-      <p style="text-align:center; color: var(--muted); max-width: 600px; margin: 0 auto; font-size: 0.9rem; line-height: 1.8;">Plan de déploiement sur 12 à 36 mois, structuré en trois phases de croissance progressive.</p>
-    </div>
-    <div class="timeline">
-      <div class="traj-phase reveal">
-        <div class="traj-content">
-          <div class="traj-period">Court terme · 0 – 12 mois</div>
-          <div class="traj-title">Fondation & Lancement</div>
-          <div class="traj-desc">Création de l'entité légale GraceTone JMP. Installation du studio semi-pro de qualité internationale. Signature des artistes pilotes. Production des premiers EP et singles. Organisation des showcases introductifs avec messages évangéliques.</div>
-        </div>
-        <div class="traj-dot"></div>
-        <div class="traj-empty"></div>
-      </div>
-      <div class="traj-phase reveal">
-        <div class="traj-empty"></div>
-        <div class="traj-dot"></div>
-        <div class="traj-content">
-          <div class="traj-period">Moyen terme · 12 – 24 mois</div>
-          <div class="traj-title">Croissance & Déploiement</div>
-          <div class="traj-desc">Mise en ligne du catalogue sur toutes les plateformes de streaming international. Première tournée régionale. Lancement de l'académie de formation musicale. Développement des partenariats stratégiques en Afrique centrale et en Europe.</div>
-        </div>
-      </div>
-      <div class="traj-phase reveal">
-        <div class="traj-content">
-          <div class="traj-period">Long terme · 24 – 36 mois</div>
-          <div class="traj-title">Rayonnement International</div>
-          <div class="traj-desc">Positionnement comme référence mondiale du jazz afro-sahélien. Tournées internationales, licences et synchronisations, partenariats avec médias internationaux. Organisation du premier grand festival GraceTone JMP à N'Djamena.</div>
-        </div>
-        <div class="traj-dot"></div>
-        <div class="traj-empty"></div>
-      </div>
+<!-- ░░░ PAGE ARTICLES ░░░ -->
+<div class="page" id="page-articles">
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="container pt">
+      <span class="section-label reveal">Culture & Musique</span>
+      <h1 class="section-title reveal">Articles <span class="it">Jazz</span></h1>
+      <div class="divider reveal"></div>
     </div>
   </div>
-</section>
-
-<!-- ARTICLES -->
-<section id="articles">
-  <div class="container">
-    <div class="articles-header reveal">
-      <div>
-        <div class="section-label">Culture & Musique</div>
-        <h2 class="section-title">Articles <span class="italic">Jazz</span></h2>
-      </div>
-      <a href="#" class="btn-ghost">Tous les articles →</a>
+  <div class="container" style="padding-bottom:6rem">
+    <div class="articles-filters reveal">
+      <button class="filter-btn active">Tous</button>
+      <button class="filter-btn">Jazz Africain</button>
+      <button class="filter-btn">Afro-Sahélien</button>
+      <button class="filter-btn">Foi & Musique</button>
+      <button class="filter-btn">Industrie</button>
+      <button class="filter-btn">Technique</button>
+      <button class="filter-btn">Interviews</button>
     </div>
-    <div class="articles-grid">
-      <div class="article-card reveal">
-        <div class="article-img">
-          <div class="article-img-placeholder">♪</div>
-          <div class="article-img-overlay"></div>
-        </div>
-        <div class="article-body">
-          <div class="article-cat">À la une · Jazz Afro-Sahélien</div>
-          <h3 class="article-title">Le jazz afro-sahélien : naissance d'un genre mondial depuis le Tchad</h3>
-          <p class="article-excerpt">Comment des musiciens tchadiens fusionnent les rythmes ancestraux du Sahel avec les harmonies bebop pour créer un son nouveau qui conquiert les scènes mondiales. GraceTone JMP au cœur de cette révolution sonore.</p>
-          <div class="article-meta">
-            <span>Mai 2025</span>
-            <span>·</span>
-            <span>8 min de lecture</span>
-          </div>
+    <div class="articles-main-grid">
+      <div class="article-featured reveal">
+        <div class="af-img"><div class="af-img-ph">♪</div><div class="af-img-ov"></div></div>
+        <div class="af-body">
+          <div class="af-cat">À la une · Jazz Afro-Sahélien</div>
+          <h2 class="af-title">Le jazz afro-sahélien : naissance d'un genre mondial depuis le Tchad</h2>
+          <p class="af-excerpt">Comment des musiciens tchadiens fusionnent les rythmes ancestraux du Sahel avec les harmonies bebop pour créer un son nouveau qui conquiert les scènes mondiales. GraceTone JMP au cœur de cette révolution sonore qui redessine la carte du jazz africain.</p>
+          <div class="af-meta"><span>Mai 2025</span><span>·</span><span>8 min de lecture</span></div>
         </div>
       </div>
-
-      <div class="article-card reveal">
-        <div class="article-img" style="height:160px;">
-          <div class="article-img-placeholder" style="font-size:3rem;">🎷</div>
-          <div class="article-img-overlay"></div>
-        </div>
-        <div class="article-body">
-          <div class="article-cat">Histoire · Jazz Africain</div>
-          <h3 class="article-title">L'héritage du jazz africain : de Fela Kuti à aujourd'hui</h3>
-          <p class="article-excerpt">Retour sur les pionniers du jazz africain et leur influence sur la nouvelle génération de musiciens du continent.</p>
-          <div class="article-meta">
-            <span>Avr. 2025</span>
-            <span>·</span>
-            <span>6 min</span>
-          </div>
-        </div>
+      <div class="articles-side">
+        <div class="article-sm reveal"><div class="article-sm-cat">Foi & Musique</div><div class="article-sm-title">Jazz et Évangile : quand la musique devient un ministère</div><div class="article-sm-meta">Avr. 2025 · 7 min</div></div>
+        <div class="article-sm reveal"><div class="article-sm-cat">Histoire · Jazz Africain</div><div class="article-sm-title">L'héritage du jazz africain : de Fela Kuti à aujourd'hui</div><div class="article-sm-meta">Mar. 2025 · 6 min</div></div>
+        <div class="article-sm reveal"><div class="article-sm-cat">Industrie · Distribution</div><div class="article-sm-title">Streaming en Afrique centrale : stratégie 2025</div><div class="article-sm-meta">Fév. 2025 · 5 min</div></div>
       </div>
-
-      <div class="article-card reveal">
-        <div class="article-img" style="height:160px;">
-          <div class="article-img-placeholder" style="font-size:3rem;">🎹</div>
-          <div class="article-img-overlay"></div>
-        </div>
-        <div class="article-body">
-          <div class="article-cat">Studio · Techniques</div>
-          <h3 class="article-title">Produire au Tchad : défis et opportunités pour un label international</h3>
-          <p class="article-excerpt">Comment GraceTone JMP relève le défi de produire une musique de qualité mondiale depuis N'Djamena.</p>
-          <div class="article-meta">
-            <span>Mar. 2025</span>
-            <span>·</span>
-            <span>5 min</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-card reveal">
-        <div class="article-img" style="height:160px;">
-          <div class="article-img-placeholder" style="font-size:3rem;">🙏</div>
-          <div class="article-img-overlay"></div>
-        </div>
-        <div class="article-body">
-          <div class="article-cat">Vision · Foi & Musique</div>
-          <h3 class="article-title">Jazz et Évangile : quand la musique devient un ministère</h3>
-          <p class="article-excerpt">La vision évangélique au cœur de GraceTone JMP : comment transmettre un message spirituel à travers le jazz afro-sahélien.</p>
-          <div class="article-meta">
-            <span>Fév. 2025</span>
-            <span>·</span>
-            <span>7 min</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-card reveal">
-        <div class="article-img" style="height:160px;">
-          <div class="article-img-placeholder" style="font-size:3rem;">🎺</div>
-          <div class="article-img-overlay"></div>
-        </div>
-        <div class="article-body">
-          <div class="article-cat">Distribution · Industrie</div>
-          <h3 class="article-title">Streaming en Afrique centrale : stratégie de distribution pour 2025</h3>
-          <p class="article-excerpt">Boomplay, Spotify, Apple Music — comment les labels africains conquièrent les plateformes mondiales.</p>
-          <div class="article-meta">
-            <span>Jan. 2025</span>
-            <span>·</span>
-            <span>6 min</span>
-          </div>
-        </div>
-      </div>
+    </div>
+    <div class="articles-row" style="margin-top:1.5px">
+      <div class="article-sm reveal" style="background:var(--dark2);border:1px solid rgba(201,168,76,.08);padding:1.8rem"><div class="article-sm-cat">Studio · Technique</div><div class="article-sm-title">Produire au Tchad : défis et opportunités pour un label international</div><div class="article-sm-meta" style="margin-top:.8rem">Jan. 2025 · 5 min</div></div>
+      <div class="article-sm reveal" style="background:var(--dark2);border:1px solid rgba(201,168,76,.08);padding:1.8rem"><div class="article-sm-cat">Improvisation · Technique</div><div class="article-sm-title">5 techniques d'improvisation jazz afro-sahélien à maîtriser</div><div class="article-sm-meta" style="margin-top:.8rem">Déc. 2024 · 6 min</div></div>
+      <div class="article-sm reveal" style="background:var(--dark2);border:1px solid rgba(201,168,76,.08);padding:1.8rem"><div class="article-sm-cat">Interview · Artiste</div><div class="article-sm-title">Rencontre avec les premiers artistes signés chez GraceTone JMP</div><div class="article-sm-meta" style="margin-top:.8rem">Nov. 2024 · 10 min</div></div>
     </div>
   </div>
-</section>
+  <footer><div class="container"><div class="footer-grid"><div class="footer-brand"><span class="footer-brand-name">GraceTone JMP</span><span class="footer-brand-sub">Jazz Music Production</span><p>Label de production musicale indépendant. N'Djamena, Tchad.</p></div><div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div><div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:info@gracetone.com">info@gracetone.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div></div><div class="footer-bottom"><span>© 2025 GraceTone JMP.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div></div></footer>
+</div><!-- /articles -->
 
-<!-- MAGAZINE -->
-<section id="magazine">
-  <div class="container">
-    <div class="mag-header reveal">
-      <div class="section-label" style="text-align:center;">Publications</div>
-      <h2 class="section-title" style="text-align:center;">GraceTone <span class="italic">Magazine</span></h2>
-      <div class="divider" style="margin: 1.5rem auto;"></div>
-      <p style="text-align:center; color: var(--muted); max-width: 500px; margin: 0 auto; font-size: 0.9rem; line-height: 1.8;">Notre magazine dédié au jazz afro-sahélien, à la culture musicale tchadienne et aux tendances de l'industrie musicale africaine.</p>
-    </div>
-    <div class="mag-grid">
-      <div class="mag-card reveal">
-        <div class="mag-cover">
-          <div class="mag-cover-art">
-            <svg viewBox="0 0 300 280" xmlns="http://www.w3.org/2000/svg">
-              <rect width="300" height="280" fill="#1A1610"/>
-              <circle cx="150" cy="130" r="90" fill="none" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
-              <circle cx="150" cy="130" r="60" fill="none" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
-              <circle cx="150" cy="130" r="30" fill="rgba(201,168,76,0.05)"/>
-              <text x="150" y="140" text-anchor="middle" font-family="serif" font-size="44" fill="rgba(201,168,76,0.35)">♪</text>
-              <text x="150" y="240" text-anchor="middle" font-family="sans-serif" font-size="18" fill="rgba(201,168,76,0.5)" letter-spacing="4">N° 1</text>
-            </svg>
-          </div>
-          <div class="mag-badge">Nouveau</div>
-        </div>
-        <div class="mag-info">
-          <div class="mag-issue">Numéro 1 — Lancement 2025</div>
-          <div class="mag-title">Jazz Afro-Sahélien : l'aube d'un genre</div>
-          <div class="mag-date">2025 · Édition de lancement</div>
-        </div>
-      </div>
-
-      <div class="mag-card reveal">
-        <div class="mag-cover">
-          <div class="mag-cover-art">
-            <svg viewBox="0 0 300 280" xmlns="http://www.w3.org/2000/svg">
-              <rect width="300" height="280" fill="#1A1610"/>
-              <rect x="50" y="40" width="200" height="200" fill="none" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
-              <rect x="75" y="65" width="150" height="150" fill="none" stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
-              <text x="150" y="155" text-anchor="middle" font-family="serif" font-size="44" fill="rgba(201,168,76,0.25)">🎷</text>
-              <text x="150" y="235" text-anchor="middle" font-family="sans-serif" font-size="16" fill="rgba(201,168,76,0.4)" letter-spacing="3">N° 2</text>
-            </svg>
-          </div>
-        </div>
-        <div class="mag-info">
-          <div class="mag-issue">Numéro 2 — Industrie</div>
-          <div class="mag-title">Produire en Afrique centrale</div>
-          <div class="mag-date">2025 · Édition industrie</div>
-        </div>
-      </div>
-
-      <div class="mag-card reveal">
-        <div class="mag-cover">
-          <div class="mag-cover-art">
-            <svg viewBox="0 0 300 280" xmlns="http://www.w3.org/2000/svg">
-              <rect width="300" height="280" fill="#1A1610"/>
-              <line x1="30" y1="130" x2="270" y2="130" stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
-              <line x1="150" y1="20" x2="150" y2="260" stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
-              <circle cx="150" cy="130" r="70" fill="none" stroke="rgba(201,168,76,0.12)" stroke-width="1"/>
-              <text x="150" y="145" text-anchor="middle" font-family="serif" font-size="44" fill="rgba(201,168,76,0.25)">♫</text>
-              <text x="150" y="240" text-anchor="middle" font-family="sans-serif" font-size="16" fill="rgba(201,168,76,0.4)" letter-spacing="3">N° 3</text>
-            </svg>
-          </div>
-        </div>
-        <div class="mag-info">
-          <div class="mag-issue">Numéro 3 — Foi & Musique</div>
-          <div class="mag-title">Jazz & Évangile : un ministère</div>
-          <div class="mag-date">2025 · Édition spirituelle</div>
-        </div>
-      </div>
-
-      <div class="mag-card reveal">
-        <div class="mag-cover">
-          <div class="mag-cover-art">
-            <svg viewBox="0 0 300 280" xmlns="http://www.w3.org/2000/svg">
-              <rect width="300" height="280" fill="#1A1610"/>
-              <polygon points="150,25 265,245 35,245" fill="none" stroke="rgba(201,168,76,0.12)" stroke-width="1"/>
-              <text x="150" y="175" text-anchor="middle" font-family="serif" font-size="44" fill="rgba(201,168,76,0.2)">🌍</text>
-              <text x="150" y="235" text-anchor="middle" font-family="sans-serif" font-size="16" fill="rgba(201,168,76,0.4)" letter-spacing="3">N° 4</text>
-            </svg>
-          </div>
-        </div>
-        <div class="mag-info">
-          <div class="mag-issue">Numéro 4 — Export Global</div>
-          <div class="mag-title">Le Tchad sur la carte du jazz</div>
-          <div class="mag-date">2025 · Édition internationale</div>
-        </div>
-      </div>
-    </div>
-    <div style="text-align:center; margin-top: 3rem;" class="reveal">
-      <a href="#" class="btn-primary">Lire le dernier numéro</a>
+<!-- ░░░ PAGE MAGAZINE ░░░ -->
+<div class="page" id="page-magazine">
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="container pt">
+      <span class="section-label reveal">Publications</span>
+      <h1 class="section-title reveal">GraceTone <span class="it">Magazine</span></h1>
+      <div class="divider reveal"></div>
     </div>
   </div>
-</section>
-
-<!-- EVENTS -->
-<section id="events">
   <div class="container">
-    <div class="events-header reveal">
-      <div>
-        <div class="section-label">Agenda GraceTone JMP</div>
-        <h2 class="section-title">Festivals & <span class="italic">Évènements</span></h2>
+    <div class="mag-featured">
+      <div class="mag-cover-big reveal">
+        <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="500" height="500" fill="#1A1610"/>
+          <circle cx="250" cy="250" r="180" fill="none" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
+          <circle cx="250" cy="250" r="120" fill="none" stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
+          <circle cx="250" cy="250" r="60" fill="rgba(201,168,76,0.04)"/>
+          <text x="250" y="275" text-anchor="middle" font-family="Bebas Neue, serif" font-size="90" fill="rgba(201,168,76,0.18)">♪</text>
+          <text x="250" y="440" text-anchor="middle" font-family="Bebas Neue, serif" font-size="28" fill="rgba(201,168,76,0.45)" letter-spacing="8">GRACETONE JMP</text>
+          <text x="250" y="80" text-anchor="middle" font-family="Bebas Neue, serif" font-size="16" fill="rgba(201,168,76,0.35)" letter-spacing="6">VOL. 4 · PRINTEMPS 2025</text>
+        </svg>
+        <div class="mag-cover-badge">Nouveau</div>
       </div>
-      <a href="#" class="btn-ghost">Calendrier complet →</a>
+      <div class="reveal">
+        <span class="mag-feat-label">Dernier numéro</span>
+        <div class="mag-feat-title">L'Âme du Jazz Africain</div>
+        <div class="mag-feat-sub">Volume 4 — Printemps 2025</div>
+        <p class="mag-feat-desc">Dans ce quatrième numéro, GraceTone Magazine explore la renaissance du jazz africain contemporain, ses racines sahéliennes et sa projection mondiale. Interviews exclusives, analyses musicales, reportages de festivals et dossier spécial sur la production musicale en Afrique centrale.</p>
+        <div class="mag-feat-meta">
+          <div class="mag-feat-meta-item"><span>Numéro</span><strong>Vol. 4 — 2025</strong></div>
+          <div class="mag-feat-meta-item"><span>Pages</span><strong>120 pages</strong></div>
+          <div class="mag-feat-meta-item"><span>Format</span><strong>PDF & Print</strong></div>
+        </div>
+        <button class="btn-gold">Lire le numéro</button>
+        <button class="btn-outline" style="margin-left:1rem">S'abonner</button>
+      </div>
+    </div>
+
+    <div class="mag-archive">
+      <div style="text-align:center" class="reveal">
+        <span class="section-label" style="display:block;text-align:center">Archives</span>
+        <h2 class="section-title" style="text-align:center">Numéros <span class="it">Précédents</span></h2>
+        <div class="divider" style="margin:1.4rem auto 0"></div>
+      </div>
+      <div class="mag-archive-grid">
+        <div class="mag-card reveal">
+          <div class="mag-cover">
+            <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="240" fill="#1A1610"/><rect x="50" y="30" width="200" height="180" fill="none" stroke="rgba(201,168,76,0.12)" stroke-width="1"/><text x="150" y="130" text-anchor="middle" font-family="Bebas Neue" font-size="60" fill="rgba(201,168,76,0.15)">🎷</text><text x="150" y="200" text-anchor="middle" font-family="Bebas Neue" font-size="16" fill="rgba(201,168,76,0.35)" letter-spacing="3">VOL. 3</text></svg>
+          </div>
+          <div class="mag-info"><div class="mag-issue">Volume 3 — Hiver 2024</div><div class="mag-title">Voix du Blues Moderne</div><div class="mag-date">Déc. 2024 · 98 pages</div></div>
+        </div>
+        <div class="mag-card reveal">
+          <div class="mag-cover">
+            <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="240" fill="#1A1610"/><circle cx="150" cy="120" r="80" fill="none" stroke="rgba(201,168,76,0.1)" stroke-width="1"/><text x="150" y="130" text-anchor="middle" font-family="Bebas Neue" font-size="60" fill="rgba(201,168,76,0.15)">♫</text><text x="150" y="200" text-anchor="middle" font-family="Bebas Neue" font-size="16" fill="rgba(201,168,76,0.35)" letter-spacing="3">VOL. 2</text></svg>
+          </div>
+          <div class="mag-info"><div class="mag-issue">Volume 2 — Automne 2024</div><div class="mag-title">Soul & Révolution</div><div class="mag-date">Sep. 2024 · 104 pages</div></div>
+        </div>
+        <div class="mag-card reveal">
+          <div class="mag-cover">
+            <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="240" fill="#1A1610"/><polygon points="150,20 260,220 40,220" fill="none" stroke="rgba(201,168,76,0.1)" stroke-width="1"/><text x="150" y="140" text-anchor="middle" font-family="Bebas Neue" font-size="50" fill="rgba(201,168,76,0.15)">🎺</text><text x="150" y="200" text-anchor="middle" font-family="Bebas Neue" font-size="16" fill="rgba(201,168,76,0.35)" letter-spacing="3">VOL. 1</text></svg>
+          </div>
+          <div class="mag-info"><div class="mag-issue">Volume 1 — Été 2024</div><div class="mag-title">Naissance d'un Label</div><div class="mag-date">Juin 2024 · 88 pages</div></div>
+        </div>
+        <div class="mag-card reveal" style="border-style:dashed;border-color:rgba(201,168,76,.15);display:flex;align-items:center;justify-content:center;min-height:320px">
+          <div style="text-align:center;padding:2rem"><div style="font-size:2.5rem;opacity:.2;margin-bottom:1rem">📖</div><div class="mag-title">Vol. 5 — Été 2025</div><div class="mag-date" style="margin-top:.3rem">À paraître · Juin 2025</div></div>
+        </div>
+      </div>
+    </div>
+    <div style="padding-bottom:6rem"></div>
+  </div>
+  <footer><div class="container"><div class="footer-grid"><div class="footer-brand"><span class="footer-brand-name">GraceTone JMP</span><span class="footer-brand-sub">Jazz Music Production</span><p>Label de production musicale indépendant. N'Djamena, Tchad.</p></div><div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div><div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:info@gracetone.com">info@gracetone.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div></div><div class="footer-bottom"><span>© 2025 GraceTone JMP.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div></div></footer>
+</div><!-- /magazine -->
+
+<!-- ░░░ PAGE EVENTS ░░░ -->
+<div class="page" id="page-events">
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="container pt">
+      <span class="section-label reveal">Agenda</span>
+      <h1 class="section-title reveal">Festivals & <span class="it">Évènements</span></h1>
+      <div class="divider reveal"></div>
+    </div>
+  </div>
+  <div class="container" style="padding-bottom:6rem">
+    <div class="events-tabs reveal">
+      <button class="events-tab active">Tous les évènements</button>
+      <button class="events-tab">Concerts</button>
+      <button class="events-tab">Festivals</button>
+      <button class="events-tab">Formations</button>
+      <button class="events-tab">Galas</button>
     </div>
     <div class="events-list">
-      <div class="event-row reveal">
-        <div class="event-date">
-          <span class="event-day">21</span>
-          <span class="event-month">Juin 2025</span>
-        </div>
-        <div class="event-info">
-          <div class="event-title">GraceTone JMP — Showcase de Lancement</div>
-          <div class="event-location">🇹🇩 Palais de la Culture, <span>N'Djamena, Tchad</span></div>
-        </div>
-        <span class="event-genre">Jazz · Évangélique</span>
-        <button class="event-cta">Réserver</button>
-      </div>
-
-      <div class="event-row reveal">
-        <div class="event-date">
-          <span class="event-day">08</span>
-          <span class="event-month">Juil. 2025</span>
-        </div>
-        <div class="event-info">
-          <div class="event-title">Festival Afro Jazz — Présence GraceTone</div>
-          <div class="event-location">🌍 Scène principale, <span>Afrique Centrale</span></div>
-        </div>
-        <span class="event-genre">Afro Jazz</span>
-        <button class="event-cta">Réserver</button>
-      </div>
-
-      <div class="event-row reveal">
-        <div class="event-date">
-          <span class="event-day">15</span>
-          <span class="event-month">Août 2025</span>
-        </div>
-        <div class="event-info">
-          <div class="event-title">Masterclass Jazz — Académie GraceTone JMP</div>
-          <div class="event-location">🎓 Studio GraceTone, <span>N'Djamena, Tchad</span></div>
-        </div>
-        <span class="event-genre">Formation</span>
-        <button class="event-cta">S'inscrire</button>
-      </div>
-
-      <div class="event-row reveal">
-        <div class="event-date">
-          <span class="event-day">10</span>
-          <span class="event-month">Sep. 2025</span>
-        </div>
-        <div class="event-info">
-          <div class="event-title">Showcase International — Tournée Régionale</div>
-          <div class="event-location">🌍 Afrique Centrale & de l'Ouest, <span>Tournée</span></div>
-        </div>
-        <span class="event-genre">Jazz · Showcase</span>
-        <button class="event-cta">Réserver</button>
-      </div>
-
-      <div class="event-row reveal">
-        <div class="event-date">
-          <span class="event-day">20</span>
-          <span class="event-month">Nov. 2025</span>
-        </div>
-        <div class="event-info">
-          <div class="event-title">GraceTone JMP Night — Première Européenne</div>
-          <div class="event-location">🌍 À confirmer, <span>Europe — Diaspora Africaine</span></div>
-        </div>
-        <span class="event-genre">Jazz · International</span>
-        <button class="event-cta">Réserver</button>
-      </div>
-
-      <div class="event-row reveal">
-        <div class="event-date">
-          <span class="event-day">31</span>
-          <span class="event-month">Déc. 2025</span>
-        </div>
-        <div class="event-info">
-          <div class="event-title">Grand Gala de Fin d'Année — GraceTone JMP</div>
-          <div class="event-location">🇹🇩 Grand Hôtel de N'Djamena, <span>Tchad</span></div>
-        </div>
-        <span class="event-genre">Gala · Jazz</span>
-        <button class="event-cta">Réserver</button>
-      </div>
+      <div class="event-row reveal"><div class="event-date"><span class="event-day">21</span><span class="event-month">Juin 2025</span></div><div><div class="event-title">GraceTone Jazz Night — Édition Pilote</div><div class="event-loc">🌍 Palais de la Musique, <span>N'Djamena, Tchad</span></div></div><span class="event-genre-tag">Jazz · Showcase</span><button class="event-btn">Réserver</button></div>
+      <div class="event-row reveal"><div class="event-date"><span class="event-day">08</span><span class="event-month">Juil. 2025</span></div><div><div class="event-title">Festival Afro Jazz de Dakar</div><div class="event-loc">🌍 Grand Théâtre National, <span>Dakar, Sénégal</span></div></div><span class="event-genre-tag">Afro Jazz</span><button class="event-btn">Réserver</button></div>
+      <div class="event-row reveal"><div class="event-date"><span class="event-day">15</span><span class="event-month">Août 2025</span></div><div><div class="event-title">Masterclass Jazz — GraceTone Academy</div><div class="event-loc">🎓 Studio GraceTone JMP, <span>N'Djamena, Tchad</span></div></div><span class="event-genre-tag">Formation</span><button class="event-btn">S'inscrire</button></div>
+      <div class="event-row reveal"><div class="event-date"><span class="event-day">02</span><span class="event-month">Sep. 2025</span></div><div><div class="event-title">Jazz à Abidjan — Showcase GraceTone</div><div class="event-loc">🌍 Institut Français, <span>Abidjan, Côte d'Ivoire</span></div></div><span class="event-genre-tag">Jazz · Showcase</span><button class="event-btn">Réserver</button></div>
+      <div class="event-row reveal"><div class="event-date"><span class="event-day">18</span><span class="event-month">Oct. 2025</span></div><div><div class="event-title">GraceTone Label Night — Paris</div><div class="event-loc">🌍 New Morning, <span>Paris, France</span></div></div><span class="event-genre-tag">Jazz · International</span><button class="event-btn">Réserver</button></div>
+      <div class="event-row reveal"><div class="event-date"><span class="event-day">30</span><span class="event-month">Nov. 2025</span></div><div><div class="event-title">Soirée de Gala GraceTone JMP 2025</div><div class="event-loc">🌍 Hôtel Hilton, <span>N'Djamena, Tchad</span></div></div><span class="event-genre-tag">Gala · Jazz</span><button class="event-btn">Réserver</button></div>
+    </div>
+    <div class="events-cta-band reveal">
+      <div><h3>Organisez un événement avec GraceTone JMP</h3><p>Partenariat, co-organisation, booking d'artistes — contactez notre équipe événementielle.</p></div>
+      <button class="btn-gold" onclick="navigate('contact')">Nous contacter</button>
     </div>
   </div>
-</section>
+  <footer><div class="container"><div class="footer-grid"><div class="footer-brand"><span class="footer-brand-name">GraceTone JMP</span><span class="footer-brand-sub">Jazz Music Production</span><p>Label de production musicale indépendant. N'Djamena, Tchad.</p></div><div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div><div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:info@gracetone.com">info@gracetone.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div></div><div class="footer-bottom"><span>© 2025 GraceTone JMP.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div></div></footer>
+</div><!-- /events -->
 
-<!-- NEWSLETTER -->
-<section id="newsletter">
+<!-- ░░░ PAGE CONTACT ░░░ -->
+<div class="page" id="page-contact">
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="container pt">
+      <span class="section-label reveal">Parlons-nous</span>
+      <h1 class="section-title reveal">Nous <span class="it">Contacter</span></h1>
+      <div class="divider reveal"></div>
+    </div>
+  </div>
   <div class="container">
-    <div class="newsletter-inner reveal">
-      <div class="section-label" style="text-align:center;">Restez connecté</div>
-      <h2 class="section-title">Rejoignez la <span class="italic">famille</span></h2>
-      <p>Abonnez-vous à notre newsletter pour recevoir en avant-première les actualités du label, les dates de concerts, les sorties d'albums, les éditions du magazine GraceTone JMP et nos articles exclusifs sur le jazz afro-sahélien.</p>
-      <div class="newsletter-form">
-        <input type="email" placeholder="votre@email.com" />
-        <button>S'abonner</button>
+    <div class="contact-grid">
+      <div class="reveal">
+        <h3 class="contact-info" style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:var(--cream2);margin-bottom:2rem;line-height:1.6">Que vous soyez artiste, partenaire ou passionné de jazz — GraceTone JMP vous écoute.</h3>
+        <div class="contact-item"><span class="contact-icon">📍</span><div><div class="contact-label">Adresse</div><div class="contact-value">N'Djamena, Tchad<br>Afrique Centrale</div></div></div>
+        <div class="contact-item"><span class="contact-icon">📧</span><div><div class="contact-label">Email</div><div class="contact-value">info@gracetone.com<br>booking@gracetone.com</div></div></div>
+        <div class="contact-item"><span class="contact-icon">🎷</span><div><div class="contact-label">Pour les artistes</div><div class="contact-value">artists@gracetone.com<br>Candidatures roster pilote</div></div></div>
+        <div class="contact-item"><span class="contact-icon">🎪</span><div><div class="contact-label">Événementiel</div><div class="contact-value">events@gracetone.com<br>Partenariats & co-organisation</div></div></div>
+        <div class="contact-socials">
+          <div class="contact-socials-title">Suivez-nous</div>
+          <div class="social-row">
+            <a href="#" class="social-btn">Instagram</a>
+            <a href="#" class="social-btn">Facebook</a>
+            <a href="#" class="social-btn">YouTube</a>
+            <a href="#" class="social-btn">Spotify</a>
+            <a href="#" class="social-btn">Boomplay</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <div id="formBody">
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Prénom</label><input class="form-input" type="text" placeholder="Votre prénom"/></div>
+            <div class="form-group"><label class="form-label">Nom</label><input class="form-input" type="text" placeholder="Votre nom"/></div>
+          </div>
+          <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="votre@email.com"/></div>
+          <div class="form-group"><label class="form-label">Objet</label>
+            <select class="form-select">
+              <option value="">Sélectionnez un objet</option>
+              <option>Candidature artiste</option>
+              <option>Partenariat / Collaboration</option>
+              <option>Booking / Événement</option>
+              <option>Presse / Média</option>
+              <option>Formation / Académie</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Votre message..."></textarea></div>
+          <button class="form-submit" onclick="submitForm()">Envoyer le message</button>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <div style="font-size:2rem;margin-bottom:1rem">✓</div>
+          <p>Message envoyé avec succès !<br>Nous vous répondrons dans les 48h.</p>
+        </div>
       </div>
     </div>
   </div>
-</section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#" class="nav-logo" style="font-size:2rem; display: block;">GraceTone <span style="font-family:'Bebas Neue'; font-size:0.9em; letter-spacing:0.2em;">JMP</span><span>Jazz Music Production</span></a>
-        <p>Label de production musicale indépendant dédié au jazz afro-sahélien à caractère évangélique. Basé à N'Djamena, Tchad — visant la référence mondiale.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Label</h4>
-        <ul>
-          <li><a href="#about">Notre histoire</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#modele">Modèle économique</a></li>
-          <li><a href="#trajectoire">Trajectoire</a></li>
-          <li><a href="#">Artistes</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contenu</h4>
-        <ul>
-          <li><a href="#articles">Articles Jazz</a></li>
-          <li><a href="#magazine">Magazine</a></li>
-          <li><a href="#events">Évènements</a></li>
-          <li><a href="#">Podcasts</a></li>
-          <li><a href="#">Playlists</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="#">info@gracetone-jmp.com</a></li>
-          <li><a href="#">N'Djamena, Tchad</a></li>
-          <li><a href="#">Partenariats</a></li>
-          <li><a href="#">Presse</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2025 GraceTone Jazz Music Production. Tous droits réservés. — N'Djamena, Tchad</span>
-      <div class="social-links">
-        <a href="#">Instagram</a>
-        <a href="#">Facebook</a>
-        <a href="#">YouTube</a>
-        <a href="#">Spotify</a>
-        <a href="#">Boomplay</a>
+  <div class="newsletter-strip">
+    <div class="container">
+      <div class="newsletter-inner reveal">
+        <span class="section-label" style="display:block;text-align:center">Newsletter</span>
+        <h2 class="section-title" style="text-align:center;margin-bottom:.8rem">Restez <span class="it">informé</span></h2>
+        <p>Actualités du label, sorties d'albums, dates de concerts et articles exclusifs — recevez tout en avant-première.</p>
+        <div class="nl-form">
+          <input class="nl-input" type="email" placeholder="votre@email.com"/>
+          <button class="nl-btn">S'abonner</button>
+        </div>
       </div>
     </div>
   </div>
-</footer>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><span class="footer-brand-name">GraceTone JMP</span><span class="footer-brand-sub">Jazz Music Production</span><p>Label de production musicale indépendant dédié au jazz afro-sahélien. Basé à N'Djamena, Tchad.</p></div>
+        <div class="footer-col"><h4>Label</h4><ul><li><button onclick="navigate('about')">Notre histoire</button></li><li><button onclick="navigate('services')">Services</button></li><li><button onclick="navigate('artists')">Artistes</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div>
+        <div class="footer-col"><h4>Contenu</h4><ul><li><button onclick="navigate('articles')">Articles</button></li><li><button onclick="navigate('magazine')">Magazine</button></li><li><button onclick="navigate('events')">Évènements</button></li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:info@gracetone.com">info@gracetone.com</a></li><li><a>N'Djamena, Tchad</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2025 GraceTone JMP. Tous droits réservés.</span><div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a><a href="#">Spotify</a></div></div>
+    </div>
+  </footer>
+</div><!-- /contact -->
+
+</div><!-- /app -->
 
 <script>
-  // CURSOR
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-  document.addEventListener('mousemove', e => {
-    mouseX = e.clientX; mouseY = e.clientY;
-    cursor.style.transform = `translate(${mouseX-5}px, ${mouseY-5}px)`;
+/* ============================================================
+   CURSOR
+============================================================ */
+const cur = document.getElementById('cur');
+const curRing = document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.transform=`translate(${mx-5}px,${my-5}px)`;
+});
+(function animRing(){
+  rx+=(mx-rx-18)*.1; ry+=(my-ry-18)*.1;
+  curRing.style.transform=`translate(${rx}px,${ry}px)`;
+  requestAnimationFrame(animRing);
+})();
+document.querySelectorAll('a,button,.artist-card,.svc-card,.event-row,.article-featured,.article-sm,.mag-card,.home-card,.pillar').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
+});
+
+/* ============================================================
+   NAV SCROLL SOLID
+============================================================ */
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+  navbar.classList.toggle('solid',window.scrollY>60);
+  // progress bar
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('progress-bar').style.width=(h>0?(window.scrollY/h*100):0)+'%';
+},{passive:true});
+
+/* ============================================================
+   MOBILE MENU
+============================================================ */
+document.getElementById('burger').addEventListener('click',()=>document.getElementById('mobMenu').classList.add('open'));
+document.getElementById('mobClose').addEventListener('click',()=>document.getElementById('mobMenu').classList.remove('open'));
+function closeMob(){document.getElementById('mobMenu').classList.remove('open')}
+
+/* ============================================================
+   ROUTER — PAGE TRANSITIONS
+============================================================ */
+let current='home';
+function navigate(page){
+  if(page===current)return;
+  const from=document.getElementById('page-'+current);
+  const to=document.getElementById('page-'+page);
+  if(!to)return;
+  // animate out
+  from.classList.add('exit');
+  setTimeout(()=>{
+    from.classList.remove('active','exit');
+    to.classList.add('active');
+    window.scrollTo({top:0,behavior:'instant'});
+    current=page;
+    updateNav(page);
+    triggerReveals(to);
+    // counter anim if home
+    if(page==='home') animCounters();
+  },300);
+}
+function updateNav(page){
+  document.querySelectorAll('.nav-links a[data-page]').forEach(a=>{
+    a.classList.toggle('active',a.dataset.page===page);
   });
-  function animateRing() {
-    ringX += (mouseX - ringX - 18) * 0.12;
-    ringY += (mouseY - ringY - 18) * 0.12;
-    ring.style.transform = `translate(${ringX}px, ${ringY}px)`;
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
-  document.querySelectorAll('a, button, .service-card, .article-card, .mag-card, .event-row, .modele-item, .vision-card').forEach(el => {
-    el.addEventListener('mouseenter', () => { ring.style.width = '60px'; ring.style.height = '60px'; });
-    el.addEventListener('mouseleave', () => { ring.style.width = '36px'; ring.style.height = '36px'; });
-  });
+}
 
-  // NAV
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 80);
-  });
-
-  // REVEAL
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i % 3 * 120);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // PLAYER
-  const playerBar = document.getElementById('playerBar');
-  const playerClose = document.getElementById('playerClose');
-  const playBtn = document.getElementById('playBtn');
-  const playerFill = document.getElementById('playerFill');
-  setTimeout(() => playerBar.classList.add('visible'), 3000);
-  playerClose.addEventListener('click', () => playerBar.classList.remove('visible'));
-  let playing = false, progress = 35, progressInterval;
-  playBtn.addEventListener('click', () => {
-    playing = !playing;
-    playBtn.textContent = playing ? '⏸' : '▶';
-    if (playing) {
-      progressInterval = setInterval(() => {
-        progress = (progress + 0.1) % 100;
-        playerFill.style.width = progress + '%';
-      }, 100);
-    } else clearInterval(progressInterval);
-  });
-
-  // COUNTERS
-  function animateCounters() {
-    document.querySelectorAll('.stat-num[data-target]').forEach(el => {
-      const target = parseInt(el.dataset.target);
-      let current = 0;
-      const step = target / 60;
-      const iv = setInterval(() => {
-        current = Math.min(current + step, target);
-        el.textContent = Math.floor(current);
-        if (current >= target) clearInterval(iv);
-      }, 20);
-    });
-  }
-  const aboutObs = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) { animateCounters(); aboutObs.unobserve(entries[0].target); }
-  }, { threshold: 0.3 });
-  aboutObs.observe(document.querySelector('#about'));
-
-  // PARALLAX
-  window.addEventListener('scroll', () => {
-    const hc = document.querySelector('.hero-content');
-    if (hc) {
-      hc.style.transform = `translateY(${window.scrollY * 0.3}px)`;
-      hc.style.opacity = Math.max(0, 1 - (window.scrollY / window.innerHeight));
+/* ============================================================
+   REVEAL ON SCROLL
+============================================================ */
+const revObs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('in'),i%4*100);
+      revObs.unobserve(e.target);
     }
   });
+},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+function triggerReveals(container){
+  container.querySelectorAll('.reveal').forEach(el=>{
+    el.classList.remove('in');
+    revObs.observe(el);
+  });
+}
+// Initial page
+triggerReveals(document.getElementById('page-home'));
 
-  // MUSIC VISUALIZER
-  const ml = document.getElementById('musicLines');
-  if (ml) {
-    const svgNS = 'http://www.w3.org/2000/svg';
-    const svg = document.createElementNS(svgNS, 'svg');
-    svg.setAttribute('viewBox', '0 0 1440 120');
-    svg.setAttribute('preserveAspectRatio', 'none');
-    const bars = 80, bw = 1440 / bars;
-    for (let i = 0; i < bars; i++) {
-      const rect = document.createElementNS(svgNS, 'rect');
-      const h = 10 + Math.random() * 60;
-      const h2 = 10 + Math.random() * 60;
-      const dur = 0.5 + Math.random() * 1.5;
-      rect.setAttribute('x', i * bw + bw * 0.1);
-      rect.setAttribute('y', 120 - h);
-      rect.setAttribute('width', bw * 0.5);
-      rect.setAttribute('height', h);
-      rect.setAttribute('fill', `rgba(201,168,76,${0.05 + Math.random() * 0.15})`);
-      rect.setAttribute('rx', '1');
-      const style = document.createElement('style');
-      style.textContent = `@keyframes bar${i}{from{height:${h}px;y:${120-h}}to{height:${h2}px;y:${120-h2}}}`;
-      document.head.appendChild(style);
-      rect.style.animation = `bar${i} ${dur}s ease-in-out infinite alternate`;
-      svg.appendChild(rect);
-    }
-    ml.appendChild(svg);
-  }
+/* ============================================================
+   COUNTER ANIMATION
+============================================================ */
+function animCounters(){
+  document.querySelectorAll('#page-home .home-stat-num[data-n]').forEach(el=>{
+    const target=+el.dataset.n;
+    let c=0; const step=target/50;
+    const iv=setInterval(()=>{
+      c=Math.min(c+step,target);
+      el.textContent=Math.floor(c);
+      if(c>=target)clearInterval(iv);
+    },25);
+  });
+}
+animCounters();
+
+/* ============================================================
+   AUDIO PLAYER
+============================================================ */
+const player=document.getElementById('player');
+const pPlay=document.getElementById('pPlay');
+const pFill=document.getElementById('pFill');
+const pClose=document.getElementById('pClose');
+let playing=false, prog=33, progIv;
+setTimeout(()=>player.classList.add('on'),3500);
+pClose.addEventListener('click',()=>player.classList.remove('on'));
+pPlay.addEventListener('click',()=>{
+  playing=!playing;
+  pPlay.textContent=playing?'⏸':'▶';
+  if(playing){progIv=setInterval(()=>{prog=(prog+.08)%100;pFill.style.width=prog+'%';},100);}
+  else clearInterval(progIv);
+});
+
+/* ============================================================
+   FILTER BUTTONS (articles)
+============================================================ */
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    this.closest('.articles-filters').querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+/* ============================================================
+   EVENTS TABS
+============================================================ */
+document.querySelectorAll('.events-tab').forEach(tab=>{
+  tab.addEventListener('click',function(){
+    this.closest('.events-tabs').querySelectorAll('.events-tab').forEach(t=>t.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+/* ============================================================
+   CONTACT FORM
+============================================================ */
+function submitForm(){
+  document.getElementById('formBody').style.display='none';
+  const s=document.getElementById('formSuccess');
+  s.style.display='block';
+  setTimeout(()=>{s.style.display='none';document.getElementById('formBody').style.display='block';},5000);
+}
+
+/* ============================================================
+   NAV — Mark home as active on load
+============================================================ */
+updateNav('home');
 </script>
 </body>
 </html>
