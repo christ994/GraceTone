@@ -419,15 +419,73 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:
 @media(max-width:768px){
   .nav-links{display:none}
   .nav-burger{display:flex}
+  nav{padding:0 1.2rem}
+  .container{padding:0 1.2rem}
+  .player{padding:.6rem 1rem;gap:.8rem}
+  .player-meta{display:none}
+  .player-prog{flex:1;min-width:80px}
+  .p-btn{display:none}
+
+  /* HERO MOBILE */
+  .home-hero{height:100svh}
+  .home-title{font-size:clamp(3.5rem,18vw,6rem)!important}
+  .home-sub{font-size:.9rem!important}
+  .home-tagline{font-size:.58rem!important;letter-spacing:.25em}
+  .home-btns{flex-direction:column;align-items:center;gap:.8rem}
+  .home-btns a,.home-btns button{width:260px;text-align:center;justify-content:center}
+  #maquetteSlider{height:150px}
+  #maquetteSlider img{height:130px!important}
+
+  /* NAV LOGO MOBILE */
+  .nav-logo img{width:32px!important;height:32px!important}
+  .nav-logo strong{font-size:1.1rem!important}
+
+  /* SECTIONS MOBILE */
   .svc-grid,.pillars-grid,.artists-grid,.articles-row{grid-template-columns:1fr}
   .articles-main-grid{grid-template-columns:1fr}
   .home-stats{grid-template-columns:1fr 1fr}
+  .home-stat{padding:1.5rem 1rem}
+  .home-stat-num{font-size:2.8rem}
   .form-row{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;gap:2rem}
   .home-btns{flex-direction:column;align-items:center}
   .events-cta-band{flex-direction:column;text-align:center}
-  .mag-cover-big{height:300px}
-  .mag-featured{padding:3rem 0}
+  .mag-cover-big{height:260px}
+  .mag-featured{padding:2rem 0;grid-template-columns:1fr!important}
+  .mag-archive-grid{grid-template-columns:1fr 1fr}
+  .home-featured-grid{grid-template-columns:1fr!important;gap:2rem}
+  .about-intro{grid-template-columns:1fr!important;gap:2rem}
+  .contact-grid{grid-template-columns:1fr!important;gap:2rem}
+  .timeline-grid{grid-template-columns:1fr!important}
+  .footer-bottom{flex-direction:column;gap:1rem;text-align:center}
+  .footer-socials{justify-content:center}
+
+  /* PAGE HERO MOBILE */
+  .pt{padding-top:calc(var(--nav-h) + 2rem)}
+  .page-hero{padding-bottom:3rem}
+  .section-title{font-size:clamp(2rem,8vw,3rem)!important}
+
+  /* EVENTS MOBILE */
+  .event-row{grid-template-columns:70px 1fr;gap:1rem;padding:1.2rem}
+  .event-day{font-size:2rem}
+  .event-genre-tag,.event-btn{display:none}
+
+  /* ARTIST CARDS MOBILE */
+  .artist-avatar{height:200px}
+
+  /* CONTACT FORM MOBILE */
+  .contact-form{padding:1.5rem}
+
+  /* PILLARS MOBILE */
+  .pillar{padding:2rem 1.5rem}
+
+  /* HOME CARDS MOBILE */
+  .home-cards .home-card{padding:1.2rem 1.4rem}
+}
+
+@media(max-width:400px){
+  .home-title{font-size:3rem!important}
+  .home-btns a,.home-btns button{width:220px;padding:.75rem 1rem;font-size:.65rem}
 }
 </style>
 </head>
@@ -477,21 +535,22 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:
 </div>
 
 <!-- AUDIO PLAYER -->
+<audio id="audioEl" src="/audio/jazz.mp3" preload="metadata"></audio>
 <div class="player" id="player">
   <div class="player-art">🎷</div>
   <div class="player-meta">
-    <div class="player-track">Afro-Sahel Blues</div>
-    <div class="player-sub">GraceTone JMP — Session Pilote</div>
+    <div class="player-track">Smooth Jazz — Cool Café Vibes</div>
+    <div class="player-sub">GraceTone JMP — Ambiance</div>
   </div>
   <div class="player-ctrl">
-    <button class="p-btn">⏮</button>
+    <button class="p-btn" id="pPrev">⏮</button>
     <button class="p-play" id="pPlay">▶</button>
-    <button class="p-btn">⏭</button>
+    <button class="p-btn" id="pNext">⏭</button>
   </div>
-  <div class="player-prog" id="pProg">
-    <div class="player-fill" id="pFill" style="width:33%"></div>
+  <div class="player-prog" id="pProg" style="cursor:pointer">
+    <div class="player-fill" id="pFill" style="width:0%"></div>
   </div>
-  <div class="player-time">1:22 / 4:07</div>
+  <div class="player-time" id="pTime">0:00 / 0:00</div>
   <button class="p-close" id="pClose">✕</button>
 </div>
 
@@ -1193,19 +1252,56 @@ animCounters();
 /* ============================================================
    AUDIO PLAYER
 ============================================================ */
+// REAL AUDIO PLAYER
 const player=document.getElementById('player');
 const pPlay=document.getElementById('pPlay');
 const pFill=document.getElementById('pFill');
 const pClose=document.getElementById('pClose');
-let playing=false, prog=33, progIv;
-setTimeout(()=>player.classList.add('on'),3500);
-pClose.addEventListener('click',()=>player.classList.remove('on'));
-pPlay.addEventListener('click',()=>{
-  playing=!playing;
-  pPlay.textContent=playing?'⏸':'▶';
-  if(playing){progIv=setInterval(()=>{prog=(prog+.08)%100;pFill.style.width=prog+'%';},100);}
-  else clearInterval(progIv);
+const pTime=document.getElementById('pTime');
+const pProg=document.getElementById('pProg');
+const audio=document.getElementById('audioEl');
+
+function fmtTime(s){
+  if(isNaN(s))return'0:00';
+  const m=Math.floor(s/60), sec=Math.floor(s%60);
+  return m+':'+(sec<10?'0':'')+sec;
+}
+
+audio.addEventListener('timeupdate',()=>{
+  if(!audio.duration)return;
+  const pct=(audio.currentTime/audio.duration)*100;
+  pFill.style.width=pct+'%';
+  pTime.textContent=fmtTime(audio.currentTime)+' / '+fmtTime(audio.duration);
 });
+
+audio.addEventListener('ended',()=>{
+  pPlay.textContent='▶';
+  audio.currentTime=0;
+});
+
+pPlay.addEventListener('click',()=>{
+  if(audio.paused){
+    audio.play();
+    pPlay.textContent='⏸';
+  } else {
+    audio.pause();
+    pPlay.textContent='▶';
+  }
+});
+
+pProg.addEventListener('click',(e)=>{
+  const rect=pProg.getBoundingClientRect();
+  const pct=(e.clientX-rect.left)/rect.width;
+  audio.currentTime=pct*audio.duration;
+});
+
+pClose.addEventListener('click',()=>{
+  audio.pause();
+  pPlay.textContent='▶';
+  player.classList.remove('on');
+});
+
+setTimeout(()=>player.classList.add('on'),3500);
 
 /* ============================================================
    FILTER BUTTONS (articles)
