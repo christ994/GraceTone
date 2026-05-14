@@ -401,91 +401,225 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:
 /* ============================================================
    RESPONSIVE
 ============================================================ */
-@media(max-width:1100px){
-  .container{padding:0 2.5rem}
-  nav{padding:0 2.5rem}
-  .player{padding:.75rem 2rem}
+
+/* ============================================================
+   TABLET 1024px
+============================================================ */
+@media(max-width:1024px){
+  .container{padding:0 2rem}
+  nav{padding:0 2rem}
   .about-intro,.contact-grid,.home-featured-grid,.mag-featured{grid-template-columns:1fr;gap:3rem}
   .about-side{position:static}
   .svc-grid{grid-template-columns:1fr 1fr}
   .timeline-grid{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2rem}
   .home-stats{grid-template-columns:1fr 1fr}
   .home-stat:nth-child(2){border-right:none}
   .event-row{grid-template-columns:90px 1fr;gap:1.5rem}
   .event-genre-tag,.event-btn{display:none}
   .mag-archive-grid{grid-template-columns:1fr 1fr}
+  .player{padding:.75rem 2rem}
 }
+
+/* ============================================================
+   MOBILE 768px
+============================================================ */
 @media(max-width:768px){
+
+  /* === CURSEUR DÉSACTIVÉ SUR MOBILE === */
+  #cur,#cur-ring{display:none}
+  body{cursor:auto}
+
+  /* === VARIABLES MOBILE === */
+  :root{--nav-h:58px}
+
+  /* === NAV === */
+  nav{padding:0 1rem;height:58px}
   .nav-links{display:none}
   .nav-burger{display:flex}
-  nav{padding:0 1.2rem}
-  .container{padding:0 1.2rem}
-  .player{padding:.6rem 1rem;gap:.8rem}
-  .player-meta{display:none}
-  .player-prog{flex:1;min-width:80px}
-  .p-btn{display:none}
-
-  /* HERO MOBILE */
-  .home-hero{height:100svh}
-  .home-title{font-size:clamp(3.5rem,18vw,6rem)!important}
-  .home-sub{font-size:.9rem!important}
-  .home-tagline{font-size:.58rem!important;letter-spacing:.25em}
-  .home-btns{flex-direction:column;align-items:center;gap:.8rem}
-  .home-btns a,.home-btns button{width:260px;text-align:center;justify-content:center}
-  #maquetteSlider{height:150px}
-  #maquetteSlider img{height:130px!important}
-
-  /* NAV LOGO MOBILE */
+  .nav-logo{gap:.6rem}
   .nav-logo img{width:32px!important;height:32px!important}
-  .nav-logo strong{font-size:1.1rem!important}
+  .nav-logo strong{font-size:1rem!important}
+  .nav-logo span{display:none}
 
-  /* SECTIONS MOBILE */
-  .svc-grid,.pillars-grid,.artists-grid,.articles-row{grid-template-columns:1fr}
-  .articles-main-grid{grid-template-columns:1fr}
-  .home-stats{grid-template-columns:1fr 1fr}
-  .home-stat{padding:1.5rem 1rem}
-  .home-stat-num{font-size:2.8rem}
-  .form-row{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr;gap:2rem}
-  .home-btns{flex-direction:column;align-items:center}
-  .events-cta-band{flex-direction:column;text-align:center}
-  .mag-cover-big{height:260px}
-  .mag-featured{padding:2rem 0;grid-template-columns:1fr!important}
-  .mag-archive-grid{grid-template-columns:1fr 1fr}
+  /* === PLAYER MOBILE === */
+  .player{padding:.5rem 1rem;gap:.7rem}
+  .player-meta{display:none}
+  .p-btn{display:none}
+  .player-prog{flex:1;min-width:60px}
+  .player-time{font-size:.6rem;white-space:nowrap}
+  .p-play{width:30px;height:30px;font-size:.75rem}
+
+  /* === CONTAINER === */
+  .container{padding:0 1rem}
+
+  /* === HERO MOBILE === */
+  .home-hero{height:100svh;min-height:580px}
+  .home-eyebrow{font-size:.52rem;letter-spacing:.25em;margin-bottom:1rem}
+  .home-title{font-size:clamp(2.8rem,15vw,5rem)!important;line-height:.88}
+  .home-sub{font-size:.82rem!important;margin-top:.6rem;padding:0 .5rem}
+  .home-tagline{font-size:.52rem!important;letter-spacing:.18em;margin-top:.4rem}
+  .home-btns{flex-direction:column;align-items:center;gap:.6rem;margin-top:1.8rem}
+  .home-btns a,.home-btns button{
+    width:min(280px,85vw);
+    text-align:center;
+    justify-content:center;
+    padding:.75rem 1rem;
+    font-size:.65rem;
+    letter-spacing:.15em;
+  }
+  .home-scroll{bottom:1.5rem}
+  .btn-gold{clip-path:none}
+
+  /* === MAQUETTE SLIDER === */
+  #maquetteSlider{height:120px!important}
+  #maquetteSlider img{height:100px!important;width:auto!important}
+  #maquetteSlider>div{gap:1rem!important;animation-duration:14s!important}
+
+  /* === MARQUEE === */
+  .marquee-bar{padding:.6rem 0}
+  .marquee-inner span{font-size:.75rem}
+
+  /* === STATS === */
+  .home-stats{grid-template-columns:1fr 1fr;border:none}
+  .home-stat{padding:1.2rem .8rem;border:1px solid rgba(201,168,76,.08)}
+  .home-stat-num{font-size:2.5rem}
+  .home-stat-label{font-size:.56rem}
+
+  /* === SECTIONS TITLES === */
+  .section-title{font-size:clamp(1.8rem,7vw,2.6rem)!important}
+  .section-label{font-size:.58rem}
+  .divider{margin:1rem 0}
+  .pt{padding-top:calc(var(--nav-h) + 1.5rem)}
+  .page-hero{padding-bottom:2.5rem}
+
+  /* === HOME FEATURED === */
+  .home-featured{padding:4rem 0}
   .home-featured-grid{grid-template-columns:1fr!important;gap:2rem}
-  .about-intro{grid-template-columns:1fr!important;gap:2rem}
-  .contact-grid{grid-template-columns:1fr!important;gap:2rem}
-  .timeline-grid{grid-template-columns:1fr!important}
-  .footer-bottom{flex-direction:column;gap:1rem;text-align:center}
-  .footer-socials{justify-content:center}
+  .home-card{padding:1rem 1.2rem;gap:1rem}
+  .home-card-icon{font-size:1.3rem;width:36px}
+  .home-card-title{font-size:.9rem}
+  .home-card-sub{font-size:.68rem}
 
-  /* PAGE HERO MOBILE */
-  .pt{padding-top:calc(var(--nav-h) + 2rem)}
-  .page-hero{padding-bottom:3rem}
-  .section-title{font-size:clamp(2rem,8vw,3rem)!important}
+  /* === PILLARS === */
+  .home-pillars{padding:0 0 4rem}
+  .pillars-grid{grid-template-columns:1fr;gap:1px}
+  .pillar{padding:1.8rem 1.4rem}
+  .pillar-title{font-size:1.1rem}
+  .pillar-desc{font-size:.8rem}
+  .pillar-num{font-size:3rem}
 
-  /* EVENTS MOBILE */
-  .event-row{grid-template-columns:70px 1fr;gap:1rem;padding:1.2rem}
-  .event-day{font-size:2rem}
+  /* === NEWSLETTER === */
+  .newsletter-strip{padding:3.5rem 0}
+  .newsletter-inner p{font-size:.82rem}
+  .nl-form{flex-direction:column}
+  .nl-btn{width:100%;padding:.9rem}
+
+  /* === FOOTER === */
+  .footer-grid{grid-template-columns:1fr;gap:1.8rem}
+  .footer-bottom{flex-direction:column;gap:.8rem;text-align:center;padding-top:1.5rem}
+  .footer-socials{justify-content:center;flex-wrap:wrap;gap:1rem}
+  footer{padding:3.5rem 0 2rem}
+  .footer-brand-name{font-size:1.5rem}
+  .footer-brand p{max-width:100%;font-size:.78rem}
+
+  /* === ABOUT PAGE === */
+  .about-intro{grid-template-columns:1fr!important;gap:2rem;padding:3rem 0 4rem}
+  .about-quote{font-size:1.05rem;padding-left:1rem;margin-bottom:1.5rem}
+  .about-body p{font-size:.88rem}
+  .about-stat-grid{grid-template-columns:1fr 1fr;gap:1rem}
+  .about-stat-n{font-size:2.2rem}
+  .about-card{padding:1.8rem}
+  .timeline-grid{grid-template-columns:1fr;gap:1px}
+  .tl-phase{padding:2rem 1.4rem}
+  .about-timeline{padding:3rem 0}
+
+  /* === SERVICES PAGE === */
+  .svc-grid{grid-template-columns:1fr;gap:1px}
+  .svc-card{padding:2rem 1.4rem}
+  .svc-title{font-size:1.1rem}
+  .svc-desc{font-size:.8rem}
+  .modele-list{gap:1px}
+  .modele-row{grid-template-columns:2.5rem 1fr;gap:.8rem;padding:1.2rem 1rem}
+  .modele-row-tag{display:none}
+  .modele-row-title{font-size:1rem}
+  .modele-row-desc{font-size:.75rem}
+  .modele-section{padding:3rem 0}
+  .services-intro{margin-bottom:2.5rem}
+  .services-intro p{font-size:.88rem}
+
+  /* === ARTISTS PAGE === */
+  .artists-grid{grid-template-columns:1fr;gap:1px}
+  .artist-avatar{height:220px}
+  .artist-name{font-size:1.15rem}
+  .artist-bio{font-size:.78rem}
+  .cfa-band{padding:2.5rem 1.5rem}
+  .cfa-band h3{font-size:1.2rem}
+  .cfa-band p{font-size:.82rem}
+
+  /* === ARTICLES PAGE === */
+  .articles-filters{gap:.4rem;margin-bottom:2rem}
+  .filter-btn{padding:.3rem .7rem;font-size:.58rem}
+  .articles-main-grid{grid-template-columns:1fr}
+  .af-img{height:200px}
+  .af-title{font-size:1.2rem}
+  .af-excerpt{font-size:.8rem;-webkit-line-clamp:2}
+  .articles-side{gap:1px}
+  .article-sm{padding:1.3rem}
+  .article-sm-title{font-size:.92rem}
+  .articles-row{grid-template-columns:1fr;gap:1px}
+
+  /* === MAGAZINE PAGE === */
+  .mag-featured{grid-template-columns:1fr!important;padding:2rem 0 3rem}
+  .mag-cover-big{height:240px}
+  .mag-feat-title{font-size:1.8rem}
+  .mag-feat-meta{gap:1rem;flex-wrap:wrap}
+  .mag-archive-grid{grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+  .mag-cover{height:160px}
+  .mag-info{padding:1rem}
+  .mag-title{font-size:.9rem}
+  .mag-archive{padding:3rem 0}
+
+  /* === EVENTS PAGE === */
+  .events-tabs{gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px}
+  .events-tab{padding:.7rem .9rem;font-size:.58rem;white-space:nowrap;flex-shrink:0}
+  .events-list{gap:1px}
+  .event-row{grid-template-columns:58px 1fr;gap:.8rem;padding:.9rem .8rem}
+  .event-day{font-size:1.8rem}
+  .event-month{font-size:.55rem}
+  .event-title{font-size:1rem;margin-bottom:.2rem}
+  .event-loc{font-size:.7rem}
   .event-genre-tag,.event-btn{display:none}
+  .events-cta-band{flex-direction:column;text-align:center;padding:2rem 1.2rem;gap:1.2rem}
+  .events-cta-band h3{font-size:1.1rem}
 
-  /* ARTIST CARDS MOBILE */
-  .artist-avatar{height:200px}
-
-  /* CONTACT FORM MOBILE */
+  /* === CONTACT PAGE === */
+  .contact-grid{grid-template-columns:1fr!important;gap:2rem;padding:3rem 0 4rem}
+  .contact-item{padding:1.2rem 0;gap:1rem}
+  .contact-value{font-size:.82rem}
   .contact-form{padding:1.5rem}
+  .form-row{grid-template-columns:1fr}
+  .form-input,.form-textarea,.form-select{font-size:.82rem;padding:.75rem .9rem}
+  .social-row{gap:.5rem}
+  .social-btn{padding:.4rem .8rem;font-size:.6rem}
+  .newsletter-strip{padding:3rem 0}
 
-  /* PILLARS MOBILE */
-  .pillar{padding:2rem 1.5rem}
-
-  /* HOME CARDS MOBILE */
-  .home-cards .home-card{padding:1.2rem 1.4rem}
+  /* === MOB MENU === */
+  .mob-menu a{font-size:1.8rem;gap:2rem}
 }
 
-@media(max-width:400px){
-  .home-title{font-size:3rem!important}
-  .home-btns a,.home-btns button{width:220px;padding:.75rem 1rem;font-size:.65rem}
+/* ============================================================
+   SMALL PHONES 400px
+============================================================ */
+@media(max-width:420px){
+  .home-title{font-size:2.6rem!important}
+  .home-btns a,.home-btns button{width:90vw}
+  .mag-archive-grid{grid-template-columns:1fr}
+  .home-stats{grid-template-columns:1fr 1fr}
+  .container{padding:0 .8rem}
+  nav{padding:0 .8rem}
+  .about-stat-grid{grid-template-columns:1fr 1fr}
+  .artist-avatar{height:180px}
 }
 </style>
 </head>
@@ -535,7 +669,6 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:
 </div>
 
 <!-- AUDIO PLAYER -->
-<audio id="audioEl" src="/audio/jazz.mp3" preload="metadata"></audio>
 <div class="player" id="player">
   <div class="player-art">🎷</div>
   <div class="player-meta">
@@ -550,7 +683,7 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:
   <div class="player-prog" id="pProg" style="cursor:pointer">
     <div class="player-fill" id="pFill" style="width:0%"></div>
   </div>
-  <div class="player-time" id="pTime">0:00 / 0:00</div>
+  <div class="player-time">En direct 🎷</div>
   <button class="p-close" id="pClose">✕</button>
 </div>
 
@@ -1252,56 +1385,20 @@ animCounters();
 /* ============================================================
    AUDIO PLAYER
 ============================================================ */
-// REAL AUDIO PLAYER
+// PLAYER VISUEL
 const player=document.getElementById('player');
 const pPlay=document.getElementById('pPlay');
 const pFill=document.getElementById('pFill');
 const pClose=document.getElementById('pClose');
-const pTime=document.getElementById('pTime');
-const pProg=document.getElementById('pProg');
-const audio=document.getElementById('audioEl');
-
-function fmtTime(s){
-  if(isNaN(s))return'0:00';
-  const m=Math.floor(s/60), sec=Math.floor(s%60);
-  return m+':'+(sec<10?'0':'')+sec;
-}
-
-audio.addEventListener('timeupdate',()=>{
-  if(!audio.duration)return;
-  const pct=(audio.currentTime/audio.duration)*100;
-  pFill.style.width=pct+'%';
-  pTime.textContent=fmtTime(audio.currentTime)+' / '+fmtTime(audio.duration);
-});
-
-audio.addEventListener('ended',()=>{
-  pPlay.textContent='▶';
-  audio.currentTime=0;
-});
-
-pPlay.addEventListener('click',()=>{
-  if(audio.paused){
-    audio.play();
-    pPlay.textContent='⏸';
-  } else {
-    audio.pause();
-    pPlay.textContent='▶';
-  }
-});
-
-pProg.addEventListener('click',(e)=>{
-  const rect=pProg.getBoundingClientRect();
-  const pct=(e.clientX-rect.left)/rect.width;
-  audio.currentTime=pct*audio.duration;
-});
-
-pClose.addEventListener('click',()=>{
-  audio.pause();
-  pPlay.textContent='▶';
-  player.classList.remove('on');
-});
-
+let playing=false,prog=0,progIv;
 setTimeout(()=>player.classList.add('on'),3500);
+pClose.addEventListener('click',()=>{clearInterval(progIv);playing=false;pPlay.textContent='▶';player.classList.remove('on');});
+pPlay.addEventListener('click',()=>{
+  playing=!playing;
+  pPlay.textContent=playing?'⏸':'▶';
+  if(playing){progIv=setInterval(()=>{prog=(prog+.05)%100;pFill.style.width=prog+'%';},100);}
+  else clearInterval(progIv);
+});
 
 /* ============================================================
    FILTER BUTTONS (articles)
